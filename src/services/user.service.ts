@@ -26,6 +26,15 @@ class UserService {
     await tokenService.saveToken(userDto.id, tokens.refreshToken);
     return { ...tokens, user: userDto };
   }
+
+  async login(username: string, password: string) {
+    const user = await User.findOne({ username });
+    const userDto = new UserDTO(user);
+    const tokens = tokenService.generateTokens({ ...userDto });
+
+    await tokenService.saveToken(userDto.id, tokens.refreshToken);
+    return { ...tokens, user: userDto };
+  }
 }
 
 export default new UserService();
