@@ -6,6 +6,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 
 import { userRouter } from "./src/routers/user.router";
+import errorMiddleware from "./src/middlewares/error.middleware";
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
 app.use("/user", userRouter);
+app.use(errorMiddleware);
 
 app.get("/", (req: express.Request, res: express.Response) => {
   res.send("Main route");
