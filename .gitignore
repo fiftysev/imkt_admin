@@ -9,10 +9,10 @@
 /client/.pnp.js
 
 # testing
-/coverage
+/client/coverage
 
 # production
-/build
+/client/build
 
 # misc
 /client/.env
