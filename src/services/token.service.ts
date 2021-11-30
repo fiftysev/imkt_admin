@@ -1,4 +1,5 @@
 import * as jwt from "jsonwebtoken";
+import { JwtPayload } from "jsonwebtoken";
 import { Types } from "mongoose";
 import { devNull } from "os";
 
@@ -44,7 +45,7 @@ class TokenService {
 
   public validateAccessToken(token: string) {
     try {
-      const userData = jwt.verify(token, this.accessSecret);
+      const userData = jwt.verify(token, this.accessSecret) as JwtPayload;
       return userData;
     } catch (e) {
       return null;
@@ -53,7 +54,7 @@ class TokenService {
 
   public validateRefreshToken(token: string) {
     try {
-      const userData = jwt.verify(token, this.refreshSecret);
+      const userData = jwt.verify(token, this.refreshSecret) as JwtPayload;
       return userData;
     } catch (e) {
       return null;
