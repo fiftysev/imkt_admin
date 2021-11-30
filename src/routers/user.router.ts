@@ -1,8 +1,10 @@
 import { Router } from "express";
-import { UserController } from "../controllers/user.controller";
+import userController from "../controllers/user.controller";
+import authMiddleware from "../middlewares/auth.middleware";
 
 export const userRouter = Router();
-const controller = new UserController();
 
-userRouter.post("/register", controller.registration);
-userRouter.post("/login", controller.login);
+userRouter.post("/register", userController.registration);
+userRouter.post("/login", userController.login);
+userRouter.get("/refresh", userController.refresh);
+userRouter.get("/users", authMiddleware, userController.getUsers);
