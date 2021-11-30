@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
-app.use("/user", userRouter);
+app.use("/auth", userRouter);
 app.use(errorMiddleware);
 
 app.get("/", (req: express.Request, res: express.Response) => {
@@ -25,9 +25,7 @@ const startServe = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_WRITE_CONNECTION_STRING!);
     app.listen(process.env.PORT, () => {
-      console.log(
-        `Example app listening at http://localhost:${process.env.PORT}`
-      );
+      console.log(`App started at http://localhost:${process.env.PORT}`);
     });
   } catch (e) {
     console.log(e);
