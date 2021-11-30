@@ -1,5 +1,6 @@
 import * as jwt from "jsonwebtoken";
 import { Types } from "mongoose";
+import { devNull } from "os";
 
 import { Token } from "../models/token.model";
 
@@ -39,6 +40,34 @@ class TokenService {
 
     const token = await Token.create({ user: userID, refreshToken });
     return token;
+  }
+
+  public validateAccessToken(token: string) {
+    try {
+      const userData = jwt.verify(token, this.accessSecret);
+      return userData;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  public validateRefreshToken(token: string) {
+    try {
+      const userData = jwt.verify(token, this.refreshSecret);
+      return userData;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async removeToken(token: string) {
+    const tokenData = await Token.deleteOne({ refreshToken: token });
+    return tokenData;
+  }
+
+  async findToken(token: string) {
+    const tokenData = await Token.findOne({ refreshToken: token });
+    return tokenData;
   }
 }
 
