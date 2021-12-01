@@ -1,10 +1,10 @@
 import { Flex } from "@chakra-ui/layout";
 import { FC } from "react";
-import { SignInForm } from "../components/forms/SignIn";
+import { SignInForm } from "../components/SignInForm";
 
 export const SignInPage: FC = () => {
   return (
-    <Flex width="full" align="center" justifyContent="center">
+    <Flex w="full" h="100vh" align="center" justifyContent="center">
       <SignInForm />
     </Flex>
   );

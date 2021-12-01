@@ -6,21 +6,23 @@ import { FC } from "react";
 
 export const SignInForm: FC = () => {
   return (
-    <Box p={2}>
+    <Box p={8} minW="500px" borderWidth={1} borderRadius={8} boxShadow="lg">
       <Box textAlign="center">
         <Heading size="lg">Вход в систему</Heading>
       </Box>
       <Box my={4}>
         <form>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel>Имя пользователя</FormLabel>
             <Input type="text" placeholder="IvanovIv23"></Input>
           </FormControl>
-          <FormControl mt={4}>
+          <FormControl mt={4} isRequired>
             <FormLabel>Пароль</FormLabel>
             <Input type="password" placeholder="*******"></Input>
           </FormControl>
-          <Button mt={4} type="submit"></Button>
+          <Button colorScheme="green" w="full" mt={4} type="submit">
+            Войти
+          </Button>
         </form>
       </Box>
     </Box>
