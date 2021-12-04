@@ -58,6 +58,7 @@ export default class Store {
 
   async logout() {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const response = await AuthService.logout();
       localStorage.removeItem("token");
       this.setAuth(false);

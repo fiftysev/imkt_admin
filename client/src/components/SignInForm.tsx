@@ -1,10 +1,16 @@
+import { FC, useContext, useState } from "react";
+import { observer } from "mobx-react-lite";
+
 import { Button } from "@chakra-ui/button";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { Input } from "@chakra-ui/input";
 import { Box, Heading, VStack } from "@chakra-ui/layout";
-import { FC, useState } from "react";
 
-export const SignInForm: FC = () => {
+import { Context } from "..";
+
+const SignInForm: FC = () => {
+  const { store } = useContext(Context);
+
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -33,7 +39,13 @@ export const SignInForm: FC = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </FormControl>
-          <Button colorScheme={"green"} w={"full"} type="submit">
+          <Button
+            colorScheme={"green"}
+            w={"full"}
+            onClick={() => {
+              store.login(username, password);
+            }}
+          >
             Войти
           </Button>
         </VStack>
@@ -41,3 +53,5 @@ export const SignInForm: FC = () => {
     </Box>
   );
 };
+
+export default observer(SignInForm);
