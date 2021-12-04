@@ -8,3 +8,4 @@ userRouter.post("/register", userController.registration);
 userRouter.post("/login", userController.login);
 userRouter.get("/refresh", userController.refresh);
 userRouter.get("/users", authMiddleware, userController.getUsers);
+userRouter.post("/logout", userController.logout);

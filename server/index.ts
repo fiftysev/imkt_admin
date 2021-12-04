@@ -15,8 +15,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(
   cors({
-    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
-    origin: "*",
+    credentials: true,
+    origin: process.env.CLIENT_URL,
   })
 );
 app.use("/auth", userRouter);
