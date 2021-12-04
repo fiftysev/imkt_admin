@@ -1,11 +1,11 @@
 export class ApiError extends Error {
   status: number;
-  errors: string[];
+  field: string;
 
-  constructor(status: number, message: string, errors = []) {
+  constructor(status: number, message: string, field: string = "") {
     super(message);
     this.status = status;
-    this.errors = errors;
+    this.field = field;
     Object.setPrototypeOf(this, new.target.prototype);
   }
 
@@ -13,7 +13,7 @@ export class ApiError extends Error {
     return new ApiError(401, "User is not authorized");
   }
 
-  static BadRequest(message: string, errors = []) {
-    return new ApiError(400, message, errors);
+  static BadRequest(message: string, field: string = "") {
+    return new ApiError(400, message, field);
   }
 }

@@ -37,12 +37,12 @@ class UserService {
     const user = await User.findOne({ username });
 
     if (!user) {
-      throw ApiError.BadRequest(`User ${username} is not found`);
+      throw ApiError.BadRequest(`User ${username} is not found`, "username");
     }
 
     const isPasswordMatching = await bcrypt.compare(password, user.password);
     if (!isPasswordMatching) {
-      throw ApiError.BadRequest("Incorrect Password!");
+      throw ApiError.BadRequest("Incorrect Password!", "password");
     }
     const userDto = new UserDTO(user);
     const tokens = tokenService.generateTokens({ ...userDto });
