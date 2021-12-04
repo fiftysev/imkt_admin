@@ -1,6 +1,5 @@
 import axios from "axios";
 import { IAuthResponse } from "../models/IAuthResponse";
-import { IUser } from "../models/IUser";
 //store!
 
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -41,3 +40,5 @@ $api.interceptors.response.use(
     throw error;
   }
 );
+
+export default $api;
