@@ -25,14 +25,15 @@ export default class Store {
   }
 
   async login(email: string, password: string) {
-    try {
-      const response = await AuthService.login(email, password);
-      localStorage.setItem("token", response.data.accessToken);
-      this.setAuth(true);
-      this.setUser(response.data.user);
-    } catch (e) {
-      console.error(e);
-    }
+    await AuthService.login(email, password)
+      .then((response) => {
+        localStorage.setItem("token", response.data.accessToken);
+        this.setAuth(true);
+        this.setUser(response.data.user);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
   }
 
   async register(
@@ -41,19 +42,15 @@ export default class Store {
     username: string,
     password: string
   ) {
-    try {
-      const response = await AuthService.register(
-        firstName,
-        lastName,
-        username,
-        password
-      );
-      localStorage.setItem("token", response.data.accessToken);
-      this.setAuth(true);
-      this.setUser(response.data.user);
-    } catch (e) {
-      console.error(e);
-    }
+    await AuthService.register(firstName, lastName, username, password)
+      .then((response) => {
+        localStorage.setItem("token", response.data.accessToken);
+        this.setAuth(true);
+        this.setUser(response.data.user);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
   }
 
   async logout() {
