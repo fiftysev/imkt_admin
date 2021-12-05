@@ -52,11 +52,7 @@ const SignInForm: FC = () => {
       </Heading>
       <form>
         <VStack spacing={4}>
-          <FormControl
-            isInvalid={!!errors?.username?.message}
-            errorText={errors?.username?.message}
-            isRequired
-          >
+          <FormControl isInvalid={!!errors?.username?.message} isRequired>
             <FormLabel>Имя пользователя</FormLabel>
             <Input
               type="text"
@@ -66,11 +62,7 @@ const SignInForm: FC = () => {
             />
             <FormErrorMessage>{errors?.username?.message}</FormErrorMessage>
           </FormControl>
-          <FormControl
-            isInvalid={!!errors?.password?.message}
-            errorText={errors?.password?.message}
-            isRequired
-          >
+          <FormControl isInvalid={!!errors?.password?.message} isRequired>
             <FormLabel>Пароль</FormLabel>
             <Input
               type="password"
