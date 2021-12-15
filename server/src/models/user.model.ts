@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose";
-import * as bcrypt from "bcrypt";
 
 import { IUser } from "./interfaces/user.interface";
 
