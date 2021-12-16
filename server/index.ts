@@ -1,5 +1,3 @@
-import { groupsRouter } from "./src/routers/groups.router";
-
 require("dotenv").config();
 import express from "express";
 import bodyParser from "body-parser";
@@ -7,7 +5,9 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 
+import { groupsRouter } from "./src/routers/groups.router";
 import { userRouter } from "./src/routers/user.router";
+import { mastersRouter } from "./src/routers/masters.router";
 import errorMiddleware from "./src/middlewares/error.middleware";
 
 const app = express();
@@ -23,6 +23,7 @@ app.use(
 );
 app.use("/auth", userRouter);
 app.use("/groups", groupsRouter);
+app.use("/masters", mastersRouter);
 app.use(errorMiddleware);
 
 app.get("/", (req: express.Request, res: express.Response) => {
