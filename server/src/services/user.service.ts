@@ -7,12 +7,7 @@ import tokenService from "./token.service";
 class UserService {
   constructor() {}
 
-  async registration(
-    firstName: string,
-    lastName: string,
-    username: string,
-    password: string
-  ) {
+  async registration(username: string, password: string) {
     const candidate = await AuthUser.findOne({ username });
     if (candidate) {
       throw ApiError.BadRequest(`User ${username} is already exist`);
@@ -21,8 +16,6 @@ class UserService {
     const saltRounds = process.env.saltRounds || 5;
     const hashPassword = await bcrypt.hash(password, +saltRounds);
     const user = await AuthUser.create({
-      firstName,
-      lastName,
       username,
       password: hashPassword,
     });
