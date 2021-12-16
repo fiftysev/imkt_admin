@@ -79,6 +79,44 @@ class GroupsController {
       });
     });
   }
+
+  async updateGroup(req: Request, res: Response, next: NextFunction) {
+    const dataForUpdate = req.body.data;
+    const id = req.body.id;
+    if (!dataForUpdate || !id) {
+      return res.status(400).json({
+        code: 400,
+        message: "Not found data to update or troubles with id",
+      });
+    }
+    try {
+      await Group.findOneAndUpdate(
+        { _id: id },
+        {
+          $set: {
+            ...dataForUpdate,
+          },
+        },
+        { new: true },
+        (err, data) => {
+          if (err) {
+            return res.status(400).json({
+              code: 400,
+              message: "Troubles when update some fields",
+              error: err,
+            });
+          }
+          return res.status(201).json({
+            code: 201,
+            message: "Successfully update group data",
+            data: data,
+          });
+        }
+      ).clone();
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }
 
 export default new GroupsController();
