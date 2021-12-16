@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Button } from "@chakra-ui/button";
-import { Box, HStack, VStack } from "@chakra-ui/layout";
+import { Box, VStack } from "@chakra-ui/layout";
 import {
   Heading,
   FormControl,
@@ -18,8 +18,6 @@ import {
 import { Context } from "..";
 
 const validationSchema = yup.object().shape({
-  firstName: yup.string().required("Обязательное поле").trim(),
-  lastName: yup.string().required("Обязательное поле").trim(),
   username: yup
     .string()
     .required("Обязательное поле")
@@ -40,8 +38,6 @@ const validationSchema = yup.object().shape({
 });
 
 type SignUpFormInputs = {
-  firstName: string;
-  lastName: string;
   username: string;
   password: string;
   passwordConfirmation: string;
@@ -56,7 +52,7 @@ export const SignUpForm: FC = () => {
   });
 
   const onSubmit = (data: SignUpFormInputs) => {
-    store.register(data.firstName, data.lastName, data.username, data.password);
+    store.register(data.username, data.password);
   };
 
   return (
@@ -66,28 +62,6 @@ export const SignUpForm: FC = () => {
       </Heading>
       <form>
         <VStack spacing={4}>
-          <HStack spacing={2}>
-            <FormControl isInvalid={!!errors?.firstName?.message} isRequired>
-              <FormLabel>Имя</FormLabel>
-              <Input
-                type="text"
-                name="firstName"
-                placeholder="Иван"
-                ref={register}
-              />
-              <FormErrorMessage>{errors?.firstName?.message}</FormErrorMessage>
-            </FormControl>
-            <FormControl isInvalid={!!errors?.lastName?.message} isRequired>
-              <FormLabel>Фамилия</FormLabel>
-              <Input
-                type="text"
-                name="lastName"
-                placeholder="Иванов"
-                ref={register}
-              />
-              <FormErrorMessage>{errors?.lastName?.message}</FormErrorMessage>
-            </FormControl>
-          </HStack>
           <FormControl isInvalid={!!errors?.username?.message} isRequired>
             <FormLabel>Имя пользователя</FormLabel>
             <Input
@@ -127,8 +101,6 @@ export const SignUpForm: FC = () => {
             colorScheme={"green"}
             w={"full"}
             disabled={
-              !!errors.firstName ||
-              !!errors.lastName ||
               !!errors.username ||
               !!errors.password ||
               !!errors.passwordConfirmation

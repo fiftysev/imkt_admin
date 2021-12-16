@@ -36,13 +36,8 @@ export default class Store {
       });
   }
 
-  async register(
-    firstName: string,
-    lastName: string,
-    username: string,
-    password: string
-  ) {
-    await AuthService.register(firstName, lastName, username, password)
+  async register(username: string, password: string) {
+    await AuthService.register(username, password)
       .then((response) => {
         localStorage.setItem("token", response.data.accessToken);
         this.setAuth(true);
@@ -55,8 +50,7 @@ export default class Store {
 
   async logout() {
     try {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const response = await AuthService.logout();
+      await AuthService.logout();
       localStorage.removeItem("token");
       this.setAuth(false);
       this.setUser({} as IUser);
