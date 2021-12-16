@@ -1,3 +1,5 @@
+import {groupsRouter} from "./src/routers/groups.router";
+
 require("dotenv").config();
 import express from "express";
 import bodyParser from "body-parser";
@@ -20,6 +22,7 @@ app.use(
   })
 );
 app.use("/auth", userRouter);
+app.use("/api", groupsRouter);
 app.use(errorMiddleware);
 
 app.get("/", (req: express.Request, res: express.Response) => {

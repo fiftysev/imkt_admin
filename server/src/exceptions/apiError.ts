@@ -9,6 +9,10 @@ export class ApiError extends Error {
     Object.setPrototypeOf(this, new.target.prototype);
   }
 
+  static NotFound() {
+    return new ApiError(404, "Data was not found!");
+  }
+
   static UnauthorizedError() {
     return new ApiError(401, "User is not authorized");
   }
