@@ -80,21 +80,23 @@ class GroupsController {
     });
   }
 
-  async updateGroup(req: Request, res: Response, next: NextFunction) {
-    const dataForUpdate = req.body.data;
-    const id = req.body.id;
-    if (!dataForUpdate || !id) {
+  async updateGroup(
+    req: Request<{}, {}, IGroup>,
+    res: Response,
+    next: NextFunction
+  ) {
+    if (!req.body) {
       return res.status(400).json({
         code: 400,
-        message: "Not found data to update or troubles with id",
+        message: "Bad request with empty body",
       });
     }
     try {
       await Group.findOneAndUpdate(
-        { _id: id },
+        { _id: req.body._id },
         {
           $set: {
-            ...dataForUpdate,
+            ...req.body,
           },
         },
         { new: true },
