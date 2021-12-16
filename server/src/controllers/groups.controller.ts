@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { Group } from "../models/group.model";
+import { IGroup } from "../models/interfaces/group.interface";
 
 class GroupsController {
   constructor() {}
@@ -56,6 +57,27 @@ class GroupsController {
         });
       });
     }
+  }
+
+  addOne(req: Request<{}, {}, IGroup>, res: Response, next: NextFunction) {
+    const group = new Group({
+      ...req.body,
+    });
+
+    group.save((err, data) => {
+      if (err) {
+        return res.status(400).json({
+          code: 400,
+          message: "Troubles with data was sent",
+          err: err.message,
+        });
+      }
+      return res.status(201).json({
+        code: 201,
+        message: "Group added successfull",
+        data: data,
+      });
+    });
   }
 }
 

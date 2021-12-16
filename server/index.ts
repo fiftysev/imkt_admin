@@ -1,4 +1,4 @@
-import {groupsRouter} from "./src/routers/groups.router";
+import { groupsRouter } from "./src/routers/groups.router";
 
 require("dotenv").config();
 import express from "express";
@@ -22,7 +22,7 @@ app.use(
   })
 );
 app.use("/auth", userRouter);
-app.use("/api", groupsRouter);
+app.use("/groups", groupsRouter);
 app.use(errorMiddleware);
 
 app.get("/", (req: express.Request, res: express.Response) => {

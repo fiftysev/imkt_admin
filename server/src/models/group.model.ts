@@ -16,7 +16,7 @@ const disciplineSchema = new Schema({
 
 const semesterSchema = new Schema({
   disciplines: [disciplineSchema],
-  semester: { type: Number },
+  semester: { type: Number, unique: true },
 });
 
 const courseWorkSchema = new Schema({
@@ -29,9 +29,9 @@ const groupSchema = new Schema({
   groupName: { type: String, required: true },
   groupNumber: { type: String, required: true },
   master: { type: Schema.Types.ObjectId, required: true, ref: "master" },
-  practices: [practiceSchema],
-  semesters: [semesterSchema],
-  courseWorks: [courseWorkSchema],
+  practices: { type: [practiceSchema], default: [] },
+  semesters: { type: [semesterSchema], default: [] },
+  courseWorks: { type: [courseWorkSchema], default: [] },
 });
 
 export const Group = model<IGroup>("Group", groupSchema);
