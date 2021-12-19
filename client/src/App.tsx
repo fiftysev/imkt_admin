@@ -27,7 +27,7 @@ export const App: FC = observer(() => {
       <Router>
         <Routes>
           <Route
-            path="/"
+            path="/*"
             element={store.isAuth ? <HomePage /> : <Navigate to="/login" />}
           />
           <Route
