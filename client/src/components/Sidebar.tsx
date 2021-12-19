@@ -1,60 +1,87 @@
-import { Flex, VStack } from "@chakra-ui/react";
-import { useState } from "react";
+import { Flex, VStack, Text, Icon, Spacer, Button } from "@chakra-ui/react";
+import { observer } from "mobx-react-lite";
+import { ReactNode, useContext } from "react";
+import {
+  HiUserGroup,
+  HiUserCircle,
+  HiUserAdd,
+  HiViewGridAdd,
+} from "react-icons/hi";
 import { Link } from "react-router-dom";
+import { Context } from "..";
 
 type SidebarItemProps = {
   title: string;
   path: string;
-  isActive?: boolean;
-  setActive?: Function;
+  icon?: ReactNode;
 };
 
-const navItems: SidebarItemProps[] = [
+const navItems = [
   {
     title: "Список групп",
-    path: "/groups",
+    path: "groups",
+    icon: <Icon as={HiUserGroup} w="6" h="6" color="white" />,
   },
   {
     title: "Список РОП",
-    path: "/masters",
+    path: "masters",
+    icon: <Icon as={HiUserCircle} w="6" h="6" color="white" />,
   },
   {
     title: "Добавить группу",
-    path: "/home",
+    path: "addgroup",
+    icon: <Icon as={HiViewGridAdd} w="6" h="6" color="white" />,
   },
   {
     title: "Добавить РОП",
-    path: "/home",
+    path: "addmaster",
+    icon: <Icon as={HiUserAdd} w="6" h="6" color="white" />,
   },
 ];
 
 const SidebarItem = (props: SidebarItemProps) => {
   return (
-    <>
-      <Link to={props.path}>{props.title}</Link>
-    </>
+    <Link to={props.path}>
+      <Flex alignItems="center" padding="0.75rem">
+        {props.icon}
+        <Text color="white" fontWeight="bold" fontSize="1.3rem" ml="0.5rem">
+          {props.title}
+        </Text>
+      </Flex>
+    </Link>
   );
 };
 
-const Sidebar = () => {
-  const [activeItem, setActiveItem] = useState<number>();
+const Sidebar = observer(() => {
+  const { store } = useContext(Context);
 
   const items = navItems.map((v, i) => {
-    return (
-      <SidebarItem
-        path={v.path}
-        title={v.title}
-        isActive={activeItem === i}
-        setActive={() => setActiveItem(i)}
-        key={i}
-      />
-    );
+    return <SidebarItem path={v.path} title={v.title} icon={v.icon} key={i} />;
   });
+
   return (
-    <Flex direction="column" bgColor="teal">
+    <Flex direction="column" bgColor="gray.900" padding="0.25rem">
       <VStack alignItems="flex-start">{items}</VStack>
+      <Spacer />
+      <Text
+        color="white"
+        fontSize="1.3rem"
+        ml="0.5rem"
+        textAlign="center"
+        mb="0.5rem"
+      >
+        {store.user.username}
+      </Text>
+      <Button
+        bgColor="red.500"
+        color="white"
+        fontWeight="bold"
+        onClick={() => store.logout()}
+      >
+        Выйти
+      </Button>
     </Flex>
   );
-};
+});
 
 export default Sidebar;
