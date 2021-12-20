@@ -44,7 +44,7 @@ const SidebarItem = (props: SidebarItemProps) => {
     <Link to={props.path}>
       <Flex alignItems="center" padding="0.75rem">
         {props.icon}
-        <Text color="white" fontWeight="bold" fontSize="1.3rem" ml="0.5rem">
+        <Text color="white" fontSize="1.3rem" ml="0.5rem">
           {props.title}
         </Text>
       </Flex>
