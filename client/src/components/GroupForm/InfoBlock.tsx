@@ -14,7 +14,7 @@ const masters = ["Сущенко А.А.", "Клевчихин Ю.А;", "Пак �
 
 const InfoBlock: FC = () => {
   return (
-    <Box padding="8">
+    <Box padding="4">
       <Heading size="lg" mb="4">
         Информация о группе
       </Heading>

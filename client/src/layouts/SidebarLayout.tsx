@@ -5,7 +5,7 @@ import Sidebar from "../components/Sidebar";
 const SidebarLayout = (props: { children: ReactNode }) => {
   return (
     <>
-      <Flex w="100" h="100vh">
+      <Flex w="100">
         <Sidebar></Sidebar>
         {props.children}
       </Flex>

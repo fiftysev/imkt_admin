@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { Tabs, TabList, TabPanels, Tab } from "@chakra-ui/react";
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import InfoBlock from "./InfoBlock";
 
 const tabNames = [
@@ -35,7 +35,9 @@ const GroupForm: FC = () => {
         })}
       </TabList>
       <TabPanels>
-        <InfoBlock />
+        <TabPanel>
+          <InfoBlock />
+        </TabPanel>
       </TabPanels>
     </Tabs>
   );

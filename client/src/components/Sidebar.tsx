@@ -60,7 +60,15 @@ const Sidebar = observer(() => {
   });
 
   return (
-    <Flex direction="column" bgColor="gray.900" padding="0.25rem">
+    <Flex
+      h="100vh"
+      direction="column"
+      bgColor="gray.900"
+      padding="0.25rem"
+      position="sticky"
+      top="0"
+      bottom="auto"
+    >
       <VStack alignItems="flex-start">{items}</VStack>
       <Spacer />
       <Text
