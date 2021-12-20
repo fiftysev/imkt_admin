@@ -2,25 +2,12 @@ import { FC } from "react";
 
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import InfoBlock from "./InfoBlock";
-
-const tabNames = [
-  {
-    title: "Информация",
-  },
-  {
-    title: "Дисциплины",
-  },
-  {
-    title: "Курсовые работы",
-  },
-  {
-    title: "Практики",
-  },
-];
+import { tabNames } from "../../data/constants";
+import DisciplinesBlock from "./Disciplines/DisciplinesBlock";
 
 const GroupForm: FC = () => {
   return (
-    <Tabs isFitted flex="1">
+    <Tabs isFitted={true} flex="1">
       <TabList>
         {tabNames.map((tab, i) => {
           return (
@@ -37,6 +24,9 @@ const GroupForm: FC = () => {
       <TabPanels>
         <TabPanel>
           <InfoBlock />
+        </TabPanel>
+        <TabPanel>
+          <DisciplinesBlock />
         </TabPanel>
       </TabPanels>
     </Tabs>
