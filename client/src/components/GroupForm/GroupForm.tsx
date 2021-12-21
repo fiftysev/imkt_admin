@@ -4,6 +4,8 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import InfoBlock from "./InfoBlock";
 import { tabNames } from "../../data/constants";
 import DisciplinesBlock from "./Disciplines/DisciplinesBlock";
+import CourseWorksBlock from "./CourseWorks/CourseWorksBlock";
+import PracticesBlock from "./Practices/PracticesBlock";
 
 const GroupForm: FC = () => {
   return (
@@ -27,6 +29,12 @@ const GroupForm: FC = () => {
         </TabPanel>
         <TabPanel>
           <DisciplinesBlock />
+        </TabPanel>
+        <TabPanel>
+          <CourseWorksBlock />
+        </TabPanel>
+        <TabPanel>
+          <PracticesBlock />
         </TabPanel>
       </TabPanels>
     </Tabs>
