@@ -1,10 +1,10 @@
 import { Box, Icon, IconButton, VStack } from "@chakra-ui/react";
 import { HiDocumentAdd } from "react-icons/hi";
-import { FC, useState } from "react";
+import { FC, ReactNode, useState } from "react";
 import DisciplineField from "./DisciplineField";
 
 const DisciplinesBlock: FC = () => {
-  const [fields, setFields] = useState([]);
+  const [fields, setFields] = useState<ReactNode[]>([<DisciplineField />]);
   return (
     <Box padding={4} borderWidth={1} borderRadius={8} boxShadow={"lg"}>
       <VStack spacing={4}>
