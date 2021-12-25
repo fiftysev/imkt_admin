@@ -7,12 +7,23 @@ const CourseWorkField: FC = () => {
       <FormControl>
         <Input type="text" placeholder="Проект по компьютерной графике" />
       </FormControl>
-      <FormControl w="40%">
-        <Select placeholder="Выберите из списка">
+      <FormControl w="50%">
+        <Select placeholder="Форма аттестации">
           {courseWorkAttForms.map((v, i) => {
             return (
               <option value={v.value} key={i}>
                 {v.name}
+              </option>
+            );
+          })}
+        </Select>
+      </FormControl>
+      <FormControl w="30%">
+        <Select placeholder="Номер семестра">
+          {["1", "2", "3", "4", "5", "6", "7", "8"].map((v, i) => {
+            return (
+              <option value={v} key={i}>
+                {v}
               </option>
             );
           })}

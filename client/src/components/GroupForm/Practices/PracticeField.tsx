@@ -2,6 +2,7 @@ import { HStack, FormControl, Input, Select } from "@chakra-ui/react";
 import { practiceForms } from "../../../data/constants";
 
 const PracticeField = () => {
+  console.log(test);
   return (
     <HStack w="100%" alignItems="flex-start">
       <FormControl>
