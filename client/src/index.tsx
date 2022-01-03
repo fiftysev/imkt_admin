@@ -4,23 +4,27 @@ import ReactDOM from "react-dom";
 import { App } from "./App";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorker from "./serviceWorker";
+import DataStore from "./store/dataStore";
 
 import Store from "./store/store";
 
 interface IState {
   store: Store;
+  dataStore: DataStore;
 }
 
 export const store = new Store();
+export const dataStore = new DataStore();
 
 export const Context = React.createContext<IState>({
   store,
+  dataStore,
 });
 
 ReactDOM.render(
   <React.StrictMode>
     <ColorModeScript />
-    <Context.Provider value={{ store }}>
+    <Context.Provider value={{ store, dataStore }}>
       <App />
     </Context.Provider>
   </React.StrictMode>,

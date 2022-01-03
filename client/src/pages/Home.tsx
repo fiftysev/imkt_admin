@@ -1,38 +1,26 @@
 import { observer } from "mobx-react-lite";
-import { FC, useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+
+import { Routes, Route } from "react-router-dom";
 import { Context } from "..";
-import { IUser } from "../models/IUser";
-import UserService from "../utils/user.service";
+import GroupForm from "../components/GroupForm/GroupForm";
+import SidebarLayout from "../layouts/SidebarLayout";
+import { IGroup } from "../models/IGroup";
 
-export const HomePage: FC = observer(() => {
-  const [users, setUsers] = useState<IUser[]>([]);
+export const HomePage = observer(() => {
+  const { dataStore } = useContext(Context);
+  const [group, setGroup] = useState<IGroup>();
 
-  const getUsers = async () => {
-    try {
-      const users = await UserService.fetchUsers();
-      setUsers(users.data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const { store } = useContext(Context);
+  useEffect(() => {
+    setGroup(dataStore.groupToUpd);
+  }, [dataStore.groupToUpd, group]);
   return (
     <>
-      <div>
-        <p>
-          {store.isAuth
-            ? `User: ${store.user.username}`
-            : `You need login first`}
-        </p>
-        <button onClick={() => store.logout()}>Выйти</button>
-        {store.isAuth && (
-          <button onClick={() => getUsers()}>пользователи</button>
-        )}
-        {users.map((user) => (
-          <div key={user.username}>{user.username}</div>
-        ))}
-      </div>
+      <SidebarLayout>
+        <Routes>
+          <Route path={`addgroup`} element={<GroupForm />} />
+        </Routes>
+      </SidebarLayout>
     </>
   );
 });
