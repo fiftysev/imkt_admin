@@ -1,4 +1,4 @@
-import { FC } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
 
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import InfoBlock from "./InfoBlock";
@@ -6,8 +6,14 @@ import { tabNames } from "../../data/constants";
 import DisciplinesBlock from "./Disciplines/DisciplinesBlock";
 import CourseWorksBlock from "./CourseWorks/CourseWorksBlock";
 import PracticesBlock from "./Practices/PracticesBlock";
+import { IGroup } from "../../models/IGroup";
+import { observer } from "mobx-react-lite";
 
-const GroupForm: FC = () => {
+type GroupFormProps = {
+  groupData?: IGroup;
+};
+
+const GroupForm = ({ groupData }: GroupFormProps) => {
   return (
     <Tabs isFitted={true} flex="1">
       <TabList>
@@ -28,7 +34,7 @@ const GroupForm: FC = () => {
           <InfoBlock />
         </TabPanel>
         <TabPanel>
-          <DisciplinesBlock />
+          <DisciplinesBlock semesters={groupData.semesters} />
         </TabPanel>
         <TabPanel>
           <CourseWorksBlock />
@@ -41,4 +47,4 @@ const GroupForm: FC = () => {
   );
 };
 
-export default GroupForm;
+export default observer(GroupForm);

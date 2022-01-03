@@ -3,15 +3,15 @@ interface IPractice {
   practice_form: string;
 }
 
-interface IDiscipline {
-  title: string;
-  attestation_form: string;
-  teacher: string;
+export interface IDiscipline {
+  title?: string;
+  attestation_form?: string;
+  teacher?: string;
   optional?: boolean;
   faculty?: boolean;
 }
 
-interface ISemester {
+export interface ISemester {
   semester: number;
   disciplines: IDiscipline[];
 }

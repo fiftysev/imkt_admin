@@ -1,14 +1,20 @@
 import { Icon, IconButton, VStack } from "@chakra-ui/react";
-import { FC, ReactNode, useState } from "react";
+import { useState } from "react";
 import { HiDocumentAdd } from "react-icons/hi";
+import { IDiscipline, ISemester } from "../../../models/IGroup";
 import DisciplineField from "./DisciplineField";
 
-const DisciplineTabPanel: FC = () => {
-  const [fields, setFields] = useState<ReactNode[]>([]);
+type PanelProps = {
+  info: ISemester;
+};
+
+const DisciplineTabPanel = (props: PanelProps) => {
+  const [semesterData, setSemester] = useState<ISemester>(props.info);
+
   return (
     <VStack spacing={4}>
-      {fields.map((v, i) => {
-        return <DisciplineField />;
+      {semesterData?.disciplines?.map((v, i) => {
+        return <DisciplineField info={v} key={i} />;
       })}
       <IconButton
         alignSelf="flex-end"
@@ -16,7 +22,11 @@ const DisciplineTabPanel: FC = () => {
         icon={<Icon as={HiDocumentAdd} />}
         colorScheme="green"
         onClick={() => {
-          setFields(fields.concat(<DisciplineField />));
+          const newData: ISemester = {
+            semester: semesterData.semester,
+            disciplines: semesterData.disciplines.concat({} as IDiscipline),
+          };
+          setSemester(newData);
         }}
       />
     </VStack>

@@ -14,12 +14,14 @@ import { SignInPage } from "./pages/SignIn";
 import { SignUpPage } from "./pages/SignUp";
 
 export const App: FC = observer(() => {
-  const { store } = useContext(Context);
+  const { store, dataStore } = useContext(Context);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
       store.refreshAuth();
     }
+    dataStore.updateGroupsList();
+    dataStore.getGroupToUpdate("60cc55ed7e001e5b1c8810bc");
   });
 
   return (
