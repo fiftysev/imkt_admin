@@ -18,7 +18,7 @@ export const HomePage = observer(() => {
     <>
       <SidebarLayout>
         <Routes>
-          <Route path={`addgroup`} element={<GroupForm />} />
+          <Route path={`addgroup`} element={<GroupForm groupData={group} />} />
         </Routes>
       </SidebarLayout>
     </>
