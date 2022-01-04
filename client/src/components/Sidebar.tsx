@@ -19,12 +19,12 @@ type SidebarItemProps = {
 const navItems = [
   {
     title: "Список групп",
-    path: "groups",
+    path: "groupslist",
     icon: <Icon as={HiUserGroup} w="6" h="6" color="white" />,
   },
   {
     title: "Список РОП",
-    path: "masters",
+    path: "masterslist",
     icon: <Icon as={HiUserCircle} w="6" h="6" color="white" />,
   },
   {

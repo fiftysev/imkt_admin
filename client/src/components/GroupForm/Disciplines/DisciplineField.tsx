@@ -8,10 +8,9 @@ import {
   Select,
   VStack,
 } from "@chakra-ui/react";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { HiDocumentAdd } from "react-icons/hi";
-import { Context } from "../../..";
-import { disciplineAttForms } from "../../../data/constants";
+import { attestationFormsList } from "../../../data/constants";
 import { IDiscipline } from "../../../models/IGroup";
 
 type FieldProps = {
@@ -19,10 +18,10 @@ type FieldProps = {
 };
 
 const DisciplineField = ({ info }: FieldProps) => {
-  const [title, setTitle] = useState(info.title);
-  const [attForm, setAttForm] = useState(info.attestation_form);
-  const [faculty, setFaculty] = useState(info.faculty);
-  const [optional, setOptional] = useState(info.optional);
+  const [title, setTitle] = useState(info?.title);
+  const [attForm, setAttForm] = useState(info?.attestation_form);
+  const [faculty, setFaculty] = useState(info?.faculty);
+  const [optional, setOptional] = useState(info?.optional);
   return (
     <HStack w="100%" alignItems="flex-start">
       <FormControl>
@@ -38,10 +37,10 @@ const DisciplineField = ({ info }: FieldProps) => {
           placeholder="Выберите из списка"
           onChange={(e) => setAttForm(e.target.value)}
         >
-          {disciplineAttForms.map((v, i) => {
+          {attestationFormsList.map((v, i) => {
             return (
               <option value={v.value} key={i}>
-                {v.name}
+                {v.label}
               </option>
             );
           })}

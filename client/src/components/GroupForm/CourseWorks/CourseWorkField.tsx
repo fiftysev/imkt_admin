@@ -1,6 +1,6 @@
 import { HStack, FormControl, Input, Select } from "@chakra-ui/react";
 import { FC } from "react";
-import { courseWorkAttForms } from "../../../data/constants";
+import { attestationFormsList } from "../../../data/constants";
 const CourseWorkField: FC = () => {
   return (
     <HStack w="100%" alignItems="flex-start">
@@ -9,10 +9,10 @@ const CourseWorkField: FC = () => {
       </FormControl>
       <FormControl w="50%">
         <Select placeholder="Форма аттестации">
-          {courseWorkAttForms.map((v, i) => {
+          {attestationFormsList.map((v, i) => {
             return (
               <option value={v.value} key={i}>
-                {v.name}
+                {v.label}
               </option>
             );
           })}

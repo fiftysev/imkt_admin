@@ -22,7 +22,8 @@ interface ICourseWork {
   semester: string;
 }
 
-export interface IGroup extends Document {
+export interface IGroup {
+  _id?: string;
   groupName: string;
   groupNumber: string;
   master?: string;
