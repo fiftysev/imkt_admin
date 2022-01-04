@@ -21,7 +21,8 @@ export const App: FC = observer(() => {
       store.refreshAuth();
     }
     dataStore.updateGroupsList();
-    dataStore.getGroupToUpdate("60cc55ed7e001e5b1c8810bc");
+    dataStore.updateMastersList();
+    // dataStore.getGroupToUpdate("60cc55ed7e001e5b1c8810bc");
   });
 
   return (

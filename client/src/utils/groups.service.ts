@@ -16,10 +16,10 @@ export default class GroupsService {
   }
 
   static async createGroup(group: IGroup) {
-    return $api.post("/groups/create", { group });
+    return $api.post("/groups/create", group);
   }
 
   static async updateGroup(group: IGroup) {
-    return $api.patch("/groups/update", { group });
+    return $api.patch("/groups/update", group);
   }
 }

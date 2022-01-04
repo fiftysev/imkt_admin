@@ -9,14 +9,11 @@ class MastersController {
     Master.find().exec((err, data) => {
       if (err) {
         return res.status(500).json({
-          code: 500,
           message: "Error when get all masters",
-          error: err,
+          error: err.message,
         });
       }
-      return res
-        .status(200)
-        .json({ code: 200, message: "All masters fetched", data });
+      return res.status(200).json(data);
     });
   }
 
@@ -25,17 +22,14 @@ class MastersController {
       Master.findById(req.params.id as string).exec((err, data) => {
         if (err) {
           return res.status(500).json({
-            code: 500,
             message: "Error when get master by id",
-            error: err,
+            error: err.message,
           });
         }
-        return res
-          .status(200)
-          .json({ code: 200, message: "Master fetched", data });
+        return res.status(200).json(data);
       });
     } else {
-      return res.status(400).json({ code: 400, message: "Invalid request" });
+      return res.status(400).json({ message: "Invalid request" });
     }
   }
 
@@ -45,13 +39,11 @@ class MastersController {
       Master.deleteOne({ _id: id }).exec((err, data) => {
         if (err) {
           return res.status(500).json({
-            code: 500,
             message: "Error when delete master by id",
-            error: err,
+            error: err.message,
           });
         }
         return res.status(200).json({
-          code: 200,
           message: "Succesfully deleted",
           deletedGroup: data,
         });
@@ -67,7 +59,6 @@ class MastersController {
     master.save((err, data) => {
       if (err) {
         return res.status(400).json({
-          code: 400,
           message: "Troubles with data was sent",
           err: err.message,
         });
@@ -75,7 +66,7 @@ class MastersController {
       return res.status(201).json({
         code: 201,
         message: "Master added successfull",
-        data: data,
+        data,
       });
     });
   }
@@ -87,7 +78,6 @@ class MastersController {
   ) {
     if (!req.body) {
       return res.status(400).json({
-        code: 400,
         message: "Bad request with empty body",
       });
     }
@@ -103,15 +93,13 @@ class MastersController {
         (err, data) => {
           if (err) {
             return res.status(400).json({
-              code: 400,
               message: "Troubles when update some fields",
-              error: err,
+              error: err.message,
             });
           }
           return res.status(201).json({
-            code: 201,
             message: "Successfully update master data",
-            data: data,
+            data,
           });
         }
       ).clone();

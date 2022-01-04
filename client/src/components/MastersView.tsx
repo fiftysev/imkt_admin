@@ -1,21 +1,21 @@
-import { Box, Button, Table, Tbody, Td, Tr } from "@chakra-ui/react";
-import { observer } from "mobx-react-lite";
+import { Table, Tbody, Tr, Td, Button, Box } from "@chakra-ui/react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "..";
 
-const GroupsView = () => {
+const MastersView = () => {
   const { dataStore } = useContext(Context);
   let navigate = useNavigate();
-  let groups = dataStore.groups;
+  let masters = dataStore.masters;
   return (
     <Box flex="1">
       <Table>
         <Tbody>
-          {groups.map((v, i) => {
+          {masters.map((v, i) => {
             return (
               <Tr key={i}>
-                <Td w="full">{v.groupNumber}</Td>
+                <Td w="full">{v.name}</Td>
+                <Td>{v.classroom}</Td>
                 <Td>
                   <Button colorScheme="blue" onClick={() => navigate(v._id)}>
                     Редактировать
@@ -25,8 +25,8 @@ const GroupsView = () => {
                   <Button
                     colorScheme="red"
                     onClick={() => {
-                      dataStore.deleteGroup(v._id);
-                      dataStore.updateGroupsList();
+                      dataStore.deleteMaster(v._id);
+                      dataStore.updateMastersList();
                     }}
                   >
                     Удалить
@@ -41,4 +41,4 @@ const GroupsView = () => {
   );
 };
 
-export default observer(GroupsView);
+export default MastersView;
