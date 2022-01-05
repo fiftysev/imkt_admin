@@ -35,7 +35,7 @@ const DisciplineField = ({ discipline }: FieldProps) => {
       <FormControl w="40%">
         <Select
           placeholder="Выберите из списка"
-          defaultValue={discipline.attestation_form}
+          defaultValue={attForm}
           onChange={(e) => {
             setAttForm(e.target.value);
             console.log(e.target.value);

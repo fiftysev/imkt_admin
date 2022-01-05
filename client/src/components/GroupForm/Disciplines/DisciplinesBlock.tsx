@@ -10,22 +10,21 @@ const tabs = ["1", "2", "3", "4", "5", "6", "7", "8"];
 
 function orderTabPanels(data: ISemester[]) {
   return tabs.map((v, i) => {
-    if (data.find((item) => item.semester === +v) !== undefined) {
-      return (
+    const currentSemester = data.find((item) => item.semester - 1 === i);
+    const panel =
+      currentSemester !== undefined ? (
         <TabPanel>
-          <DisciplinesTabPanel key={i} info={data[i]} />
+          <DisciplinesTabPanel key={i} info={currentSemester} />
         </TabPanel>
-      );
-    } else {
-      return (
+      ) : (
         <TabPanel>
           <DisciplinesTabPanel
             key={i}
-            info={{ semester: +v, disciplines: [] }}
+            info={{ semester: i + 1, disciplines: [] }}
           />
         </TabPanel>
       );
-    }
+    return panel;
   });
 }
 

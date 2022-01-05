@@ -14,7 +14,8 @@ export const HomePage = observer(() => {
   const [group, setGroup] = useState<IGroup>();
 
   useEffect(() => {
-    setGroup(dataStore.groups[0]);
+    console.log(dataStore.groups[dataStore.groups.length - 1]);
+    setGroup(dataStore.groups[dataStore.groups.length - 1]);
   }, [dataStore.groups, group]);
   return (
     <>

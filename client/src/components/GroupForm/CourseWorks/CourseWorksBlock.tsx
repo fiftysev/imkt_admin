@@ -1,5 +1,5 @@
 import { Icon, IconButton, VStack } from "@chakra-ui/react";
-import { ReactNode, useState } from "react";
+import { useState } from "react";
 import { HiDocumentAdd } from "react-icons/hi";
 import { ICourseWork } from "../../../models/IGroup";
 import CourseWorkField from "./CourseWorkField";

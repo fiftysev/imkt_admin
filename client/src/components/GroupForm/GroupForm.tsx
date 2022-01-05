@@ -33,7 +33,7 @@ const GroupForm = ({ groupData }: GroupFormProps) => {
           <InfoBlock />
         </TabPanel>
         <TabPanel>
-          <DisciplinesBlock />
+          <DisciplinesBlock semesters={groupData.semesters} />
         </TabPanel>
         <TabPanel>
           <CourseWorksBlock CWList={groupData.courseWorks} />
