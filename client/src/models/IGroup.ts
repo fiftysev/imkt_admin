@@ -1,4 +1,4 @@
-interface IPractice {
+export interface IPractice {
   title: string;
   practice_form: string;
 }

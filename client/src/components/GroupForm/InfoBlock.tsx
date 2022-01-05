@@ -6,26 +6,37 @@ import {
   Select,
   VStack,
 } from "@chakra-ui/react";
-import { FC } from "react";
+import { useContext } from "react";
+import { Context } from "../..";
 
-// TODO: Masters list from backend
-const masters = ["Сущенко А.А.", "Клевчихин Ю.А;", "Пак Т.В."];
+type IBlockProps = {
+  groupNumber?: string;
+  master?: string;
+};
 
-const InfoBlock: FC = () => {
+const InfoBlock = ({ groupNumber, master }: IBlockProps) => {
+  const { dataStore } = useContext(Context);
   return (
     <Box padding="4">
       <VStack>
         <FormControl>
           <FormLabel>Номер группы</FormLabel>
-          <Input type="text" placeholder="Б9120-02.03.01сцт" />
+          <Input
+            type="text"
+            placeholder="Б9120-02.03.01сцт"
+            value={groupNumber}
+          />
         </FormControl>
         <FormControl>
           <FormLabel>Руководитель образовательной программы</FormLabel>
-          <Select placeholder="Выбрать из списка">
-            {masters.map((v, i) => {
+          <Select
+            placeholder="Выбрать из списка"
+            defaultValue={dataStore.masters.find((v) => v._id === master)._id}
+          >
+            {dataStore.masters.map((v, i) => {
               return (
-                <option value={v} key={i}>
-                  {v}
+                <option value={v._id} key={i}>
+                  {v.name}
                 </option>
               );
             })}
