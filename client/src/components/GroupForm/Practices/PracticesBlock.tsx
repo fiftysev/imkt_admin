@@ -8,7 +8,7 @@ const PracticesBlock = () => {
   return (
     <VStack spacing={4}>
       {fields.map((v, i) => {
-        return <PracticeField />;
+        return <PracticeField key={i} />;
       })}
       <IconButton
         alignSelf="flex-end"

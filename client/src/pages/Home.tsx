@@ -14,8 +14,8 @@ export const HomePage = observer(() => {
   const [group, setGroup] = useState<IGroup>();
 
   useEffect(() => {
-    setGroup(dataStore.groupToUpd);
-  }, [dataStore.groupToUpd, group]);
+    setGroup(dataStore.groups[0]);
+  }, [dataStore.groups, group]);
   return (
     <>
       <SidebarLayout>

@@ -14,7 +14,7 @@ const GroupsView = () => {
         <Tbody>
           {groups.map((v, i) => {
             return (
-              <Tr key={i}>
+              <Tr key={v._id}>
                 <Td w="full">{v.groupNumber}</Td>
                 <Td>
                   <Button colorScheme="blue" onClick={() => navigate(v._id)}>

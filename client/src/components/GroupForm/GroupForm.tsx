@@ -20,9 +20,8 @@ const GroupForm = ({ groupData }: GroupFormProps) => {
         {tabNames.map((tab, i) => {
           return (
             <Tab
-              isFitted
               _selected={{ bgColor: "gray.900", color: "white" }}
-              key={i}
+              key={tab.title}
             >
               {tab.title}
             </Tab>

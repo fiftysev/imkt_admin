@@ -9,7 +9,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { HiDocumentAdd } from "react-icons/hi";
+import { FiSave } from "react-icons/fi";
 import { attestationFormsList } from "../../../data/constants";
 import { IDiscipline } from "../../../models/IGroup";
 
@@ -35,7 +35,10 @@ const DisciplineField = ({ info }: FieldProps) => {
       <FormControl w="40%">
         <Select
           placeholder="Выберите из списка"
-          onChange={(e) => setAttForm(e.target.value)}
+          onChange={(e) => {
+            setAttForm(e.target.value);
+            console.log(e.target.value);
+          }}
         >
           {attestationFormsList.map((v, i) => {
             return (
@@ -63,7 +66,7 @@ const DisciplineField = ({ info }: FieldProps) => {
       <IconButton
         alignSelf="flex-end"
         aria-label="Сохранить дисциплину"
-        icon={<Icon as={HiDocumentAdd} />}
+        icon={<Icon as={FiSave} />}
         colorScheme="blue"
         onClick={() => {}}
       />

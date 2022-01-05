@@ -13,7 +13,7 @@ const MastersView = () => {
         <Tbody>
           {masters.map((v, i) => {
             return (
-              <Tr key={i}>
+              <Tr key={v._id}>
                 <Td w="full">{v.name}</Td>
                 <Td>{v.classroom}</Td>
                 <Td>
