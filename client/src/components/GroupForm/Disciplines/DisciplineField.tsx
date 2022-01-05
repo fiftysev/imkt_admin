@@ -14,14 +14,14 @@ import { attestationFormsList } from "../../../data/constants";
 import { IDiscipline } from "../../../models/IGroup";
 
 type FieldProps = {
-  info?: IDiscipline;
+  discipline?: IDiscipline;
 };
 
-const DisciplineField = ({ info }: FieldProps) => {
-  const [title, setTitle] = useState(info?.title);
-  const [attForm, setAttForm] = useState(info?.attestation_form);
-  const [faculty, setFaculty] = useState(info?.faculty);
-  const [optional, setOptional] = useState(info?.optional);
+const DisciplineField = ({ discipline }: FieldProps) => {
+  const [title, setTitle] = useState(discipline?.title);
+  const [attForm, setAttForm] = useState(discipline?.attestation_form);
+  const [faculty, setFaculty] = useState(discipline?.faculty);
+  const [optional, setOptional] = useState(discipline?.optional);
   return (
     <HStack w="100%" alignItems="flex-start">
       <FormControl>
@@ -35,6 +35,7 @@ const DisciplineField = ({ info }: FieldProps) => {
       <FormControl w="40%">
         <Select
           placeholder="Выберите из списка"
+          defaultValue={discipline.attestation_form}
           onChange={(e) => {
             setAttForm(e.target.value);
             console.log(e.target.value);

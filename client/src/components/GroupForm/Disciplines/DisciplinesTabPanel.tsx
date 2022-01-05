@@ -14,7 +14,7 @@ const DisciplinesTabPanel = (props: PanelProps) => {
   return (
     <VStack spacing={4}>
       {semesterData?.disciplines?.map((v, i) => {
-        return <DisciplineField info={v} key={i} />;
+        return <DisciplineField discipline={v} key={i} />;
       })}
       <IconButton
         alignSelf="flex-end"
