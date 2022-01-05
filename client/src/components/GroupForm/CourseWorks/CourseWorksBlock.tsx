@@ -1,14 +1,19 @@
 import { Icon, IconButton, VStack } from "@chakra-ui/react";
-import { FC, ReactNode, useState } from "react";
+import { ReactNode, useState } from "react";
 import { HiDocumentAdd } from "react-icons/hi";
+import { ICourseWork } from "../../../models/IGroup";
 import CourseWorkField from "./CourseWorkField";
 
-const CourseWorksBlock: FC = () => {
-  const [fields, setFields] = useState<ReactNode[]>([]);
+type CWBlockProps = {
+  CWList?: ICourseWork[];
+};
+
+const CourseWorksBlock = ({ CWList }: CWBlockProps) => {
+  const [courseWorks, setCourseWorks] = useState<ICourseWork[]>(CWList || []);
   return (
     <VStack spacing={4}>
-      {fields.map((v, i) => {
-        return <CourseWorkField />;
+      {courseWorks.map((v, i) => {
+        return <CourseWorkField key={i} courseWork={v} />;
       })}
       <IconButton
         alignSelf="flex-end"
@@ -16,7 +21,7 @@ const CourseWorksBlock: FC = () => {
         icon={<Icon as={HiDocumentAdd} />}
         colorScheme="green"
         onClick={() => {
-          setFields(fields.concat(<CourseWorkField />));
+          setCourseWorks(courseWorks.concat({} as ICourseWork));
         }}
       />
     </VStack>

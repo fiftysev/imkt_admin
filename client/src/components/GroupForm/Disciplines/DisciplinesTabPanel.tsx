@@ -8,7 +8,7 @@ type PanelProps = {
   info: ISemester;
 };
 
-const DisciplineTabPanel = (props: PanelProps) => {
+const DisciplinesTabPanel = (props: PanelProps) => {
   const [semesterData, setSemester] = useState<ISemester>(props.info);
 
   return (
@@ -33,4 +33,4 @@ const DisciplineTabPanel = (props: PanelProps) => {
   );
 };
 
-export default DisciplineTabPanel;
+export default DisciplinesTabPanel;

@@ -16,7 +16,7 @@ export interface ISemester {
   disciplines: IDiscipline[];
 }
 
-interface ICourseWork {
+export interface ICourseWork {
   title: string;
   attestation_form: string;
   semester: string;
