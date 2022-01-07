@@ -1,4 +1,13 @@
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import {
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  Button,
+  VStack,
+  Box,
+} from "@chakra-ui/react";
 import InfoBlock from "./InfoBlock";
 import { emptyGroup, tabNames } from "../../data/constants";
 import DisciplinesBlock from "./Disciplines/DisciplinesBlock";
@@ -27,37 +36,42 @@ const GroupForm = ({ isNew }: GroupFormProps) => {
   console.log(dataStore.newGroup);
 
   return (
-    <Tabs isFitted={true} flex="1">
-      <TabList>
-        {tabNames.map((tab, i) => {
-          return (
-            <Tab
-              _selected={{ bgColor: "gray.900", color: "white" }}
-              key={tab.title}
-            >
-              {tab.title}
-            </Tab>
-          );
-        })}
-      </TabList>
-      <TabPanels>
-        <TabPanel>
-          <InfoBlock
-            groupNumber={groupData.groupNumber}
-            master={groupData.master}
-          />
-        </TabPanel>
-        <TabPanel>
-          <DisciplinesBlock semesters={groupData.semesters} />
-        </TabPanel>
-        <TabPanel>
-          <CourseWorksBlock CWList={groupData.courseWorks} />
-        </TabPanel>
-        <TabPanel>
-          <PracticesBlock PList={groupData.practices} />
-        </TabPanel>
-      </TabPanels>
-    </Tabs>
+    <VStack flex="1">
+      <Tabs isFitted={true} w="full">
+        <TabList>
+          {tabNames.map((tab, i) => {
+            return (
+              <Tab
+                _selected={{ bgColor: "gray.900", color: "white" }}
+                key={tab.title}
+              >
+                {tab.title}
+              </Tab>
+            );
+          })}
+        </TabList>
+        <TabPanels>
+          <TabPanel>
+            <InfoBlock
+              groupNumber={groupData.groupNumber}
+              master={groupData.master}
+            />
+          </TabPanel>
+          <TabPanel>
+            <DisciplinesBlock semesters={groupData.semesters} />
+          </TabPanel>
+          <TabPanel>
+            <CourseWorksBlock CWList={groupData.courseWorks} />
+          </TabPanel>
+          <TabPanel>
+            <PracticesBlock PList={groupData.practices} />
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+      <Box p={8} alignSelf="flex-end">
+        <Button colorScheme="blue">Сохранить</Button>
+      </Box>
+    </VStack>
   );
 };
 

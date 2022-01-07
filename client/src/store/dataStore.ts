@@ -39,6 +39,14 @@ export default class DataStore {
     return toJS(this.mastersList);
   }
 
+  changeGroupNumber(v: string) {
+    this.newGroup.groupNumber = v;
+  }
+
+  changeMaster(v: string) {
+    this.newGroup.master = v;
+  }
+
   async updateGroupsList() {
     await GroupsService.getGroupsList()
       .then((res) => {
