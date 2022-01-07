@@ -7,7 +7,6 @@ import MastersService from "../utils/masters.service";
 export default class DataStore {
   groupsList: IGroup[];
   newGroup: IGroup;
-  groupToUpdate: IGroup;
 
   mastersList: IMaster[];
   newMaster: IMaster;
@@ -22,7 +21,8 @@ export default class DataStore {
   }
 
   setGroupToUpdate(group: IGroup) {
-    this.groupToUpdate = group;
+    this.newGroup = group;
+    return group;
   }
 
   setMastersList(list: IMaster[]) {
@@ -37,8 +37,8 @@ export default class DataStore {
     return toJS(this.groupsList);
   }
 
-  get groupToUpd() {
-    return toJS(this.groupToUpdate);
+  get groupToUpdate() {
+    return toJS(this.newGroup);
   }
 
   get masters() {

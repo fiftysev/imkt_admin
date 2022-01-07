@@ -10,6 +10,7 @@ type CWBlockProps = {
 
 const CourseWorksBlock = ({ CWList }: CWBlockProps) => {
   const [courseWorks, setCourseWorks] = useState<ICourseWork[]>(CWList || []);
+
   return (
     <VStack spacing={4}>
       {courseWorks.map((v, i) => {

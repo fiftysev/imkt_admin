@@ -6,6 +6,7 @@ import {
   Select,
   VStack,
 } from "@chakra-ui/react";
+import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 import { Context } from "../..";
 
@@ -31,7 +32,7 @@ const InfoBlock = ({ groupNumber, master }: IBlockProps) => {
           <FormLabel>Руководитель образовательной программы</FormLabel>
           <Select
             placeholder="Выбрать из списка"
-            defaultValue={dataStore.masters.find((v) => v._id === master)._id}
+            defaultValue={dataStore.masters.find((v) => v._id === master)?._id}
           >
             {dataStore.masters.map((v, i) => {
               return (
@@ -47,4 +48,4 @@ const InfoBlock = ({ groupNumber, master }: IBlockProps) => {
   );
 };
 
-export default InfoBlock;
+export default observer(InfoBlock);

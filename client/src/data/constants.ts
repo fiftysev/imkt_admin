@@ -1,3 +1,5 @@
+import { IGroup } from "../models/IGroup";
+
 export const tabNames = [
   {
     title: "Информация",
@@ -94,3 +96,45 @@ export const practiceForms = [
     value: "internship",
   },
 ];
+
+export const emptyGroup: IGroup = {
+  groupName: "",
+  groupNumber: "",
+  master: "",
+  practices: [],
+  semesters: [
+    {
+      semester: 1,
+      disciplines: [],
+    },
+    {
+      semester: 2,
+      disciplines: [],
+    },
+    {
+      semester: 3,
+      disciplines: [],
+    },
+    {
+      semester: 4,
+      disciplines: [],
+    },
+    {
+      semester: 5,
+      disciplines: [],
+    },
+    {
+      semester: 6,
+      disciplines: [],
+    },
+    {
+      semester: 7,
+      disciplines: [],
+    },
+    {
+      semester: 8,
+      disciplines: [],
+    },
+  ],
+  courseWorks: [],
+};

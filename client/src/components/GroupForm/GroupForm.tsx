@@ -2,18 +2,30 @@
 
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import InfoBlock from "./InfoBlock";
-import { tabNames } from "../../data/constants";
+import { emptyGroup, tabNames } from "../../data/constants";
 import DisciplinesBlock from "./Disciplines/DisciplinesBlock";
 import CourseWorksBlock from "./CourseWorks/CourseWorksBlock";
 import PracticesBlock from "./Practices/PracticesBlock";
-import { IGroup } from "../../models/IGroup";
 import { observer } from "mobx-react-lite";
 
+import { useContext } from "react";
+import { Context } from "../..";
+import { useParams } from "react-router-dom";
+
 type GroupFormProps = {
-  groupData?: IGroup;
+  isNew?: boolean;
 };
 
-const GroupForm = ({ groupData }: GroupFormProps) => {
+const GroupForm = ({ isNew }: GroupFormProps) => {
+  const { dataStore } = useContext(Context);
+  const params = useParams();
+
+  const groupData = isNew
+    ? dataStore.setGroupToUpdate(emptyGroup)
+    : dataStore.setGroupToUpdate(
+        dataStore.groups.find((v) => v._id === params.id)
+      );
+
   return (
     <Tabs isFitted={true} flex="1">
       <TabList>
