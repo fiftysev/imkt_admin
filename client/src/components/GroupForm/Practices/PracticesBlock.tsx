@@ -1,19 +1,27 @@
 import { VStack, IconButton, Icon } from "@chakra-ui/react";
-import { useState } from "react";
+import { observer } from "mobx-react-lite";
+import { useContext } from "react";
 import { HiDocumentAdd } from "react-icons/hi";
-import { IPractice } from "../../../models/IGroup";
+
+import { v4 as uuid } from "uuid";
+
+import { Context } from "../../..";
 import PracticeField from "./PracticeField";
 
-type PBlockProps = {
-  PList?: IPractice[];
-};
-
-const PracticesBlock = ({ PList }: PBlockProps) => {
-  const [practices, setPractices] = useState<IPractice[]>(PList || []);
+const PracticesBlock = () => {
+  const { dataStore } = useContext(Context);
   return (
     <VStack spacing={4}>
-      {practices.map((v, i) => {
-        return <PracticeField key={i} practice={v} />;
+      {dataStore.groupToUpdate.practices.map((v, i) => {
+        return (
+          <PracticeField
+            key={i}
+            practice={v}
+            handler={(field: string, value: string) =>
+              dataStore.updatePractices(v._id || v.uid, field, value)
+            }
+          />
+        );
       })}
       <IconButton
         alignSelf="flex-end"
@@ -21,11 +29,11 @@ const PracticesBlock = ({ PList }: PBlockProps) => {
         icon={<Icon as={HiDocumentAdd} />}
         colorScheme="green"
         onClick={() => {
-          setPractices(practices.concat({} as IPractice));
+          dataStore.addNewPractice(uuid());
         }}
       />
     </VStack>
   );
 };
 
-export default PracticesBlock;
+export default observer(PracticesBlock);

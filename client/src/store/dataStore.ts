@@ -1,5 +1,5 @@
 import { makeAutoObservable, toJS } from "mobx";
-import { IGroup } from "../models/IGroup";
+import { IGroup, IPractice } from "../models/IGroup";
 import { IMaster } from "../models/IMaster";
 import GroupsService from "../utils/groups.service";
 import MastersService from "../utils/masters.service";
@@ -45,6 +45,21 @@ export default class DataStore {
 
   changeMaster(v: string) {
     this.newGroup.master = v;
+  }
+
+  updatePractices(id: string, field: string, value: string) {
+    const idx = this.newGroup.practices.findIndex(
+      (v) => v.uid === id || v._id === id
+    );
+    this.newGroup.practices[idx][field] = value;
+  }
+
+  addNewPractice(id: string) {
+    this.newGroup.practices.push({
+      uid: id,
+      practice_form: "",
+      title: "",
+    } as IPractice);
   }
 
   async updateGroupsList() {

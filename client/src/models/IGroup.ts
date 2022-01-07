@@ -1,4 +1,10 @@
-export interface IPractice {
+interface Indexable {
+  [key: string | number]: any;
+}
+
+export interface IPractice extends Indexable {
+  _id?: string;
+  uid?: string;
   title: string;
   practice_form: string;
 }
