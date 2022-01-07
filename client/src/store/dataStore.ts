@@ -9,8 +9,6 @@ export default class DataStore {
   newGroup: IGroup;
 
   mastersList: IMaster[];
-  newMaster: IMaster;
-  masterToUpdate: IMaster;
 
   constructor() {
     makeAutoObservable(this);
@@ -29,10 +27,6 @@ export default class DataStore {
     this.mastersList = list;
   }
 
-  setMasterToUpdate(master: IMaster) {
-    this.masterToUpdate = master;
-  }
-
   get groups() {
     return toJS(this.groupsList);
   }
@@ -49,16 +43,6 @@ export default class DataStore {
     await GroupsService.getGroupsList()
       .then((res) => {
         this.setGroupsList(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  async getGroupToUpdate(id: string) {
-    await GroupsService.getGroupById(id)
-      .then((res) => {
-        this.setGroupToUpdate(res.data);
       })
       .catch((err) => {
         console.log(err);

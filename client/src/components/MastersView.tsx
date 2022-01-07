@@ -1,10 +1,11 @@
 import { Table, Tbody, Tr, Td, Button, Box } from "@chakra-ui/react";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { Context } from "..";
+import MasterForm from "./MasterForm";
 
-const MastersView = () => {
+const MastersList = observer(() => {
   const { dataStore } = useContext(Context);
   let navigate = useNavigate();
   let masters = dataStore.masters;
@@ -41,6 +42,16 @@ const MastersView = () => {
       </Table>
     </Box>
   );
+});
+
+const MastersView = () => {
+  return (
+    <Routes>
+      <Route path="" element={<MastersList />} />
+      <Route path=":id" element={<MasterForm />} />
+      <Route />
+    </Routes>
+  );
 };
 
-export default observer(MastersView);
+export default MastersView;

@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import InfoBlock from "./InfoBlock";
 import { emptyGroup, tabNames } from "../../data/constants";
@@ -25,6 +23,8 @@ const GroupForm = ({ isNew }: GroupFormProps) => {
     : dataStore.setGroupToUpdate(
         dataStore.groups.find((v) => v._id === params.id)
       );
+
+  console.log(dataStore.newGroup);
 
   return (
     <Tabs isFitted={true} flex="1">

@@ -14,7 +14,7 @@ function orderTabPanels(data: ISemester[]) {
     const panel =
       currentSemester !== undefined ? (
         <TabPanel>
-          <DisciplinesTabPanel key={i} info={currentSemester} />
+          <DisciplinesTabPanel key={i * 12} info={currentSemester} />
         </TabPanel>
       ) : (
         <TabPanel>

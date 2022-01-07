@@ -1,4 +1,5 @@
 import { IGroup } from "../models/IGroup";
+import { IMaster } from "../models/IMaster";
 
 export const tabNames = [
   {
@@ -137,4 +138,11 @@ export const emptyGroup: IGroup = {
     },
   ],
   courseWorks: [],
+};
+
+export const emptyMaster: IMaster = {
+  name: "",
+  classroom: "",
+  email: "",
+  another_contact: "",
 };
