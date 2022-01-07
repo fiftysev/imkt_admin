@@ -18,7 +18,12 @@ const PracticesBlock = () => {
             key={i}
             practice={v}
             handler={(field: string, value: string) =>
-              dataStore.updatePractices(v._id || v.uid, field, value)
+              dataStore.updatePracticesOrCourseworks(
+                "practices",
+                v._id || v.uid,
+                field,
+                value
+              )
             }
           />
         );

@@ -22,13 +22,15 @@ export interface ISemester {
   disciplines: IDiscipline[];
 }
 
-export interface ICourseWork {
+export interface ICourseWork extends Indexable {
+  _id?: string;
+  uid?: string;
   title: string;
   attestation_form: string;
   semester: string;
 }
 
-export interface IGroup {
+export interface IGroup extends Indexable {
   _id?: string;
   groupName: string;
   groupNumber: string;

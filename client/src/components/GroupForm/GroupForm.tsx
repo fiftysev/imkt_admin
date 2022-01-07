@@ -32,7 +32,6 @@ const GroupForm = ({ isNew }: GroupFormProps) => {
     : dataStore.setGroupToUpdate(
         dataStore.groups.find((v) => v._id === params.id)
       );
-
   return (
     <VStack flex="1">
       <Tabs isFitted={true} w="full">
@@ -59,7 +58,7 @@ const GroupForm = ({ isNew }: GroupFormProps) => {
             <DisciplinesBlock semesters={groupData.semesters} />
           </TabPanel>
           <TabPanel>
-            <CourseWorksBlock CWList={groupData.courseWorks} />
+            <CourseWorksBlock />
           </TabPanel>
           <TabPanel>
             <PracticesBlock />
@@ -70,7 +69,7 @@ const GroupForm = ({ isNew }: GroupFormProps) => {
         <Button
           colorScheme="blue"
           onClick={(e) => {
-            console.log(dataStore.groupToUpdate.practices);
+            console.log(dataStore.groupToUpdate.courseWorks);
           }}
         >
           Сохранить

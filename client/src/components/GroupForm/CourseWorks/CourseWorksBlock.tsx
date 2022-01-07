@@ -1,20 +1,32 @@
 import { Icon, IconButton, VStack } from "@chakra-ui/react";
-import { useState } from "react";
+import { observer } from "mobx-react-lite";
+import { useContext } from "react";
 import { HiDocumentAdd } from "react-icons/hi";
-import { ICourseWork } from "../../../models/IGroup";
+
+import { v4 as uuid } from "uuid";
+
+import { Context } from "../../..";
 import CourseWorkField from "./CourseWorkField";
 
-type CWBlockProps = {
-  CWList?: ICourseWork[];
-};
-
-const CourseWorksBlock = ({ CWList }: CWBlockProps) => {
-  const [courseWorks, setCourseWorks] = useState<ICourseWork[]>(CWList || []);
-
+const CourseWorksBlock = () => {
+  const { dataStore } = useContext(Context);
   return (
     <VStack spacing={4}>
-      {courseWorks.map((v, i) => {
-        return <CourseWorkField key={i} courseWork={v} />;
+      {dataStore.groupToUpdate.courseWorks.map((v, i) => {
+        return (
+          <CourseWorkField
+            key={i}
+            courseWork={v}
+            handler={(field: string, value: string) =>
+              dataStore.updatePracticesOrCourseworks(
+                "courseWorks",
+                v._id || v.uid,
+                field,
+                value
+              )
+            }
+          />
+        );
       })}
       <IconButton
         alignSelf="flex-end"
@@ -22,11 +34,11 @@ const CourseWorksBlock = ({ CWList }: CWBlockProps) => {
         icon={<Icon as={HiDocumentAdd} />}
         colorScheme="green"
         onClick={() => {
-          setCourseWorks(courseWorks.concat({} as ICourseWork));
+          dataStore.addNewCoursework(uuid());
         }}
       />
     </VStack>
   );
 };
 
-export default CourseWorksBlock;
+export default observer(CourseWorksBlock);

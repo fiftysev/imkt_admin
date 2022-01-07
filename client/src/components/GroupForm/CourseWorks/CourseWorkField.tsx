@@ -4,22 +4,31 @@ import { ICourseWork } from "../../../models/IGroup";
 
 type CWFieldProps = {
   courseWork?: ICourseWork;
+  handler?: Function;
 };
 
-const CourseWorkField = ({ courseWork }: CWFieldProps) => {
+const CourseWorkField = ({ courseWork, handler }: CWFieldProps) => {
   return (
     <HStack w="100%" alignItems="flex-start">
       <FormControl>
         <Input
           type="text"
           placeholder="Проект по компьютерной графике"
-          value={courseWork?.title}
+          defaultValue={courseWork?.title}
+          name="title"
+          onChange={(e) => {
+            handler(e.target.name, e.target.value);
+          }}
         />
       </FormControl>
       <FormControl w="50%">
         <Select
           placeholder="Форма аттестации"
           defaultValue={courseWork?.attestation_form}
+          name="attestation_form"
+          onChange={(e) => {
+            handler(e.target.name, e.target.value);
+          }}
         >
           {attestationFormsList.map((v, i) => {
             return (
@@ -34,6 +43,10 @@ const CourseWorkField = ({ courseWork }: CWFieldProps) => {
         <Select
           placeholder="Номер семестра"
           defaultValue={courseWork?.semester}
+          name="semester"
+          onChange={(e) => {
+            handler(e.target.name, e.target.value);
+          }}
         >
           {["1", "2", "3", "4", "5", "6", "7", "8"].map((v, i) => {
             return (

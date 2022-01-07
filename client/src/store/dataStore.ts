@@ -1,5 +1,5 @@
 import { makeAutoObservable, toJS } from "mobx";
-import { IGroup, IPractice } from "../models/IGroup";
+import { ICourseWork, IGroup, IPractice } from "../models/IGroup";
 import { IMaster } from "../models/IMaster";
 import GroupsService from "../utils/groups.service";
 import MastersService from "../utils/masters.service";
@@ -47,11 +47,16 @@ export default class DataStore {
     this.newGroup.master = v;
   }
 
-  updatePractices(id: string, field: string, value: string) {
-    const idx = this.newGroup.practices.findIndex(
-      (v) => v.uid === id || v._id === id
+  updatePracticesOrCourseworks(
+    type: string,
+    id: string,
+    field: string,
+    value: string
+  ) {
+    const idx = this.newGroup[type].findIndex(
+      (v: IPractice | ICourseWork) => v.uid === id || v._id === id
     );
-    this.newGroup.practices[idx][field] = value;
+    this.newGroup[type][idx][field] = value;
   }
 
   addNewPractice(id: string) {
@@ -60,6 +65,15 @@ export default class DataStore {
       practice_form: "",
       title: "",
     } as IPractice);
+  }
+
+  addNewCoursework(id: string) {
+    this.newGroup.courseWorks.push({
+      uid: id,
+      title: "",
+      attestation_form: "",
+      semester: "",
+    });
   }
 
   async updateGroupsList() {
