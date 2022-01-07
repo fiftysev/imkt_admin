@@ -6,13 +6,20 @@ import {
   Input,
   VStack,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Context } from "..";
+
+import MastersService from "../utils/masters.service";
 
 const MasterForm = () => {
   const [name, setName] = useState<string>("");
   const [classroom, setClassroom] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [contact, setContact] = useState<string>("");
+
+  const { dataStore } = useContext(Context);
+  const navigate = useNavigate();
 
   return (
     <Box flex="1" p={8}>
@@ -59,7 +66,25 @@ const MasterForm = () => {
               value={contact}
             ></Input>
           </FormControl>
-          <Button alignSelf="flex-end" colorScheme="blue" type="submit">
+          <Button
+            alignSelf="flex-end"
+            colorScheme="blue"
+            type="submit"
+            onClick={async (e) => {
+              e.preventDefault();
+              await MastersService.createMaster({
+                name,
+                classroom,
+                email,
+                another_contact: contact,
+              }).then((res) => {
+                console.log(res.data);
+                dataStore
+                  .updateMastersList()
+                  .then((_res) => navigate("/masterslist"));
+              });
+            }}
+          >
             Сохранить
           </Button>
         </VStack>

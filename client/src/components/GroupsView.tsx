@@ -25,8 +25,9 @@ const GroupsView = () => {
                   <Button
                     colorScheme="red"
                     onClick={() => {
-                      dataStore.deleteGroup(v._id);
-                      dataStore.updateGroupsList();
+                      dataStore
+                        .deleteGroup(v._id)
+                        .then((res) => dataStore.updateGroupsList());
                     }}
                   >
                     Удалить

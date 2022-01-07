@@ -1,4 +1,5 @@
 import { Table, Tbody, Tr, Td, Button, Box } from "@chakra-ui/react";
+import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "..";
@@ -25,8 +26,9 @@ const MastersView = () => {
                   <Button
                     colorScheme="red"
                     onClick={() => {
-                      dataStore.deleteMaster(v._id);
-                      dataStore.updateMastersList();
+                      dataStore
+                        .deleteMaster(v._id)
+                        .then((res) => dataStore.updateMastersList());
                     }}
                   >
                     Удалить
@@ -41,4 +43,4 @@ const MastersView = () => {
   );
 };
 
-export default MastersView;
+export default observer(MastersView);
