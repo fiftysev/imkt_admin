@@ -2,44 +2,36 @@ import {
   Checkbox,
   FormControl,
   HStack,
-  Icon,
-  IconButton,
   Input,
   Select,
   VStack,
 } from "@chakra-ui/react";
-import { useState } from "react";
-import { FiSave } from "react-icons/fi";
 import { attestationFormsList } from "../../../data/constants";
 import { IDiscipline } from "../../../models/IGroup";
 
 type FieldProps = {
   discipline?: IDiscipline;
+  handler?: Function;
 };
 
-const DisciplineField = ({ discipline }: FieldProps) => {
-  const [title, setTitle] = useState(discipline?.title);
-  const [attForm, setAttForm] = useState(discipline?.attestation_form);
-  const [faculty, setFaculty] = useState(discipline?.faculty);
-  const [optional, setOptional] = useState(discipline?.optional);
+const DisciplineField = ({ discipline, handler }: FieldProps) => {
   return (
     <HStack w="100%" alignItems="flex-start">
       <FormControl>
         <Input
           type="text"
           placeholder="Web-программирование"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          name="title"
+          defaultValue={discipline.title}
+          onChange={(e) => handler(e.target.name, e.target.value)}
         />
       </FormControl>
       <FormControl w="40%">
         <Select
           placeholder="Выберите из списка"
-          defaultValue={attForm}
-          onChange={(e) => {
-            setAttForm(e.target.value);
-            console.log(e.target.value);
-          }}
+          defaultValue={discipline.attestation_form}
+          name="attestation_form"
+          onChange={(e) => handler(e.target.name, e.target.value)}
         >
           {attestationFormsList.map((v, i) => {
             return (
@@ -52,25 +44,20 @@ const DisciplineField = ({ discipline }: FieldProps) => {
       </FormControl>
       <VStack w="25%" alignItems="flex-start">
         <Checkbox
-          isChecked={!!optional}
-          onChange={(e) => setOptional(e.target.checked)}
+          isChecked={discipline.optional}
+          name="optional"
+          onChange={(e) => handler(e.target.name, e.target.checked)}
         >
           По выбору
         </Checkbox>
         <Checkbox
-          isChecked={!!faculty}
-          onChange={(e) => setFaculty(e.target.checked)}
+          isChecked={discipline.faculty}
+          name="faculty"
+          onChange={(e) => handler(e.target.name, e.target.checked)}
         >
           Факультатив
         </Checkbox>
       </VStack>
-      <IconButton
-        alignSelf="flex-end"
-        aria-label="Сохранить дисциплину"
-        icon={<Icon as={FiSave} />}
-        colorScheme="blue"
-        onClick={() => {}}
-      />
     </HStack>
   );
 };

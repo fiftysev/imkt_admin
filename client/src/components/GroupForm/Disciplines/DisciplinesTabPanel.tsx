@@ -1,20 +1,39 @@
 import { Icon, IconButton, VStack } from "@chakra-ui/react";
-import { useState } from "react";
+import { observer } from "mobx-react-lite";
+import { useContext } from "react";
 import { HiDocumentAdd } from "react-icons/hi";
-import { IDiscipline, ISemester } from "../../../models/IGroup";
+import { Context } from "../../..";
+
+import { v4 as uuid } from "uuid";
+
 import DisciplineField from "./DisciplineField";
 
-type PanelProps = {
-  info: ISemester;
+type DTabPanelProps = {
+  semesterNum?: number;
 };
 
-const DisciplinesTabPanel = (props: PanelProps) => {
-  const [semesterData, setSemester] = useState<ISemester>(props.info);
-
+const DisciplinesTabPanel = ({ semesterNum }: DTabPanelProps) => {
+  const { dataStore } = useContext(Context);
+  const semesterData = dataStore.groupToUpdate.semesters.find(
+    (v) => v.semester === semesterNum
+  );
   return (
     <VStack spacing={4}>
       {semesterData?.disciplines?.map((v, i) => {
-        return <DisciplineField discipline={v} key={i} />;
+        return (
+          <DisciplineField
+            discipline={v}
+            key={i}
+            handler={(field: string, value: string | boolean) =>
+              dataStore.updateSemestersData(
+                semesterNum,
+                v._id || v.uid,
+                field,
+                value
+              )
+            }
+          />
+        );
       })}
       <IconButton
         alignSelf="flex-end"
@@ -22,15 +41,11 @@ const DisciplinesTabPanel = (props: PanelProps) => {
         icon={<Icon as={HiDocumentAdd} />}
         colorScheme="green"
         onClick={() => {
-          const newData: ISemester = {
-            semester: semesterData.semester,
-            disciplines: semesterData.disciplines.concat({} as IDiscipline),
-          };
-          setSemester(newData);
+          dataStore.addNewDiscipline(semesterNum, uuid());
         }}
       />
     </VStack>
   );
 };
 
-export default DisciplinesTabPanel;
+export default observer(DisciplinesTabPanel);

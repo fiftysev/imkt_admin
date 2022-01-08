@@ -55,7 +55,7 @@ const GroupForm = ({ isNew }: GroupFormProps) => {
             />
           </TabPanel>
           <TabPanel>
-            <DisciplinesBlock semesters={groupData.semesters} />
+            <DisciplinesBlock />
           </TabPanel>
           <TabPanel>
             <CourseWorksBlock />
@@ -69,7 +69,7 @@ const GroupForm = ({ isNew }: GroupFormProps) => {
         <Button
           colorScheme="blue"
           onClick={(e) => {
-            console.log(dataStore.groupToUpdate.courseWorks);
+            console.log(dataStore.groupToUpdate.semesters);
           }}
         >
           Сохранить

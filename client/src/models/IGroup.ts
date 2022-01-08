@@ -9,7 +9,9 @@ export interface IPractice extends Indexable {
   practice_form: string;
 }
 
-export interface IDiscipline {
+export interface IDiscipline extends Indexable {
+  _id?: string;
+  uid?: string;
   title?: string;
   attestation_form?: string;
   teacher?: string;
@@ -17,7 +19,7 @@ export interface IDiscipline {
   faculty?: boolean;
 }
 
-export interface ISemester {
+export interface ISemester extends Indexable {
   semester: number;
   disciplines: IDiscipline[];
 }

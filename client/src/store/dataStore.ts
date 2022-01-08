@@ -59,6 +59,22 @@ export default class DataStore {
     this.newGroup[type][idx][field] = value;
   }
 
+  updateSemestersData(
+    semesterNum: number,
+    id: string,
+    field: string,
+    value: string | boolean
+  ) {
+    const semIdx = this.newGroup.semesters.findIndex(
+      (v) => v.semester === semesterNum
+    );
+    const disciplineIdx = this.newGroup.semesters[semIdx].disciplines.findIndex(
+      (v) => v._id === id || v.uid === id
+    );
+
+    this.newGroup.semesters[semIdx].disciplines[disciplineIdx][field] = value;
+  }
+
   addNewPractice(id: string) {
     this.newGroup.practices.push({
       uid: id,
@@ -73,6 +89,20 @@ export default class DataStore {
       title: "",
       attestation_form: "",
       semester: "",
+    });
+  }
+
+  addNewDiscipline(semesterNum: number, id: string) {
+    const idx = this.newGroup.semesters.findIndex(
+      (v) => v.semester === semesterNum
+    );
+    this.newGroup.semesters[idx].disciplines.push({
+      uid: id,
+      title: "",
+      attestation_form: "",
+      teacher: "",
+      faculty: false,
+      optional: false,
     });
   }
 
