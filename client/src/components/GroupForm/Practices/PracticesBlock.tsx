@@ -1,5 +1,4 @@
 import { VStack, IconButton, Icon } from "@chakra-ui/react";
-import { observer } from "mobx-react-lite";
 import { useContext, useState } from "react";
 import { HiDocumentAdd } from "react-icons/hi";
 

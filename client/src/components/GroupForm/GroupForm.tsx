@@ -13,7 +13,6 @@ import { emptyGroup, tabNames } from "../../data/constants";
 import DisciplinesBlock from "./Disciplines/DisciplinesBlock";
 import CourseWorksBlock from "./CourseWorks/CourseWorksBlock";
 import PracticesBlock from "./Practices/PracticesBlock";
-import { observer } from "mobx-react-lite";
 
 import { useContext } from "react";
 import { Context } from "../..";
@@ -79,4 +78,4 @@ const GroupForm = ({ isNew }: GroupFormProps) => {
   );
 };
 
-export default observer(GroupForm);
+export default GroupForm;
