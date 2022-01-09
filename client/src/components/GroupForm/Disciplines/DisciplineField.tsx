@@ -15,6 +15,7 @@ type FieldProps = {
 };
 
 const DisciplineField = ({ discipline, handler }: FieldProps) => {
+  console.log("rendered!");
   return (
     <HStack w="100%" alignItems="flex-start">
       <FormControl>

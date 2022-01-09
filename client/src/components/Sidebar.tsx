@@ -7,7 +7,7 @@ import {
   HiUserAdd,
   HiViewGridAdd,
 } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "..";
 
 type SidebarItemProps = {
@@ -54,6 +54,7 @@ const SidebarItem = (props: SidebarItemProps) => {
 
 const Sidebar = observer(() => {
   const { store } = useContext(Context);
+  const navigate = useNavigate();
 
   const items = navItems.map((v, i) => {
     return <SidebarItem path={v.path} title={v.title} icon={v.icon} key={i} />;
@@ -84,7 +85,10 @@ const Sidebar = observer(() => {
         bgColor="red.500"
         color="white"
         fontWeight="bold"
-        onClick={() => store.logout()}
+        onClick={() => {
+          store.logout();
+          navigate("/login");
+        }}
       >
         Выйти
       </Button>

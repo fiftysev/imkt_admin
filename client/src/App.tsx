@@ -30,33 +30,15 @@ export const App: FC = observer(() => {
         <Routes>
           <Route
             path="/*"
-            element={
-              localStorage.getItem("token") ? (
-                <HomePage />
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
+            element={store.isAuth ? <HomePage /> : <Navigate to="/login" />}
           />
           <Route
             path="/login"
-            element={
-              localStorage.getItem("token") ? (
-                <Navigate to="/" />
-              ) : (
-                <SignInPage />
-              )
-            }
+            element={store.isAuth ? <Navigate to="/" /> : <SignInPage />}
           />
           <Route
             path="/signup"
-            element={
-              localStorage.getItem("token") ? (
-                <Navigate to="/" />
-              ) : (
-                <SignUpPage />
-              )
-            }
+            element={store.isAuth ? <Navigate to="/" /> : <SignUpPage />}
           />
         </Routes>
       </Router>

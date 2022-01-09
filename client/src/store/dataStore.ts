@@ -1,5 +1,5 @@
 import { makeAutoObservable, toJS } from "mobx";
-import { ICourseWork, IGroup, IPractice } from "../models/IGroup";
+import { ICourseWork, IDiscipline, IGroup, IPractice } from "../models/IGroup";
 import { IMaster } from "../models/IMaster";
 import GroupsService from "../utils/groups.service";
 import MastersService from "../utils/masters.service";
@@ -92,17 +92,12 @@ export default class DataStore {
     });
   }
 
-  addNewDiscipline(semesterNum: number, id: string) {
+  addNewDiscipline(semesterNum: number, discipline: IDiscipline) {
     const idx = this.newGroup.semesters.findIndex(
       (v) => v.semester === semesterNum
     );
     this.newGroup.semesters[idx].disciplines.push({
-      uid: id,
-      title: "",
-      attestation_form: "",
-      teacher: "",
-      faculty: false,
-      optional: false,
+      discipline,
     });
   }
 
