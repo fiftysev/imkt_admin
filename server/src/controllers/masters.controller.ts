@@ -8,10 +8,7 @@ class MastersController {
   getAll(req: Request, res: Response, next: NextFunction) {
     Master.find().exec((err, data) => {
       if (err) {
-        return res.status(500).json({
-          message: "Error when get all masters",
-          error: err.message,
-        });
+        return res.status(500).json(err.message);
       }
       return res.status(200).json(data);
     });
@@ -21,15 +18,12 @@ class MastersController {
     if (req.params.id) {
       Master.findById(req.params.id as string).exec((err, data) => {
         if (err) {
-          return res.status(500).json({
-            message: "Error when get master by id",
-            error: err.message,
-          });
+          return res.status(500).json(err.message);
         }
         return res.status(200).json(data);
       });
     } else {
-      return res.status(400).json({ message: "Invalid request" });
+      return res.status(400).json("Invalid request");
     }
   }
 
@@ -38,15 +32,9 @@ class MastersController {
       const id = req.params.id as string;
       Master.deleteOne({ _id: id }).exec((err, data) => {
         if (err) {
-          return res.status(500).json({
-            message: "Error when delete master by id",
-            error: err.message,
-          });
+          return res.status(500).json(err.message);
         }
-        return res.status(200).json({
-          message: "Succesfully deleted",
-          deletedGroup: data,
-        });
+        return res.status(200).json(data);
       });
     }
   }
@@ -58,16 +46,9 @@ class MastersController {
 
     master.save((err, data) => {
       if (err) {
-        return res.status(400).json({
-          message: "Troubles with data was sent",
-          err: err.message,
-        });
+        return res.status(400).json(err.message);
       }
-      return res.status(201).json({
-        code: 201,
-        message: "Master added successfull",
-        data,
-      });
+      return res.status(201).json(data);
     });
   }
 
@@ -77,9 +58,7 @@ class MastersController {
     next: NextFunction
   ) {
     if (!req.body) {
-      return res.status(400).json({
-        message: "Bad request with empty body",
-      });
+      return res.status(400).json("Bad request with empty body");
     }
     try {
       await Master.findOneAndUpdate(
@@ -92,15 +71,9 @@ class MastersController {
         { new: true },
         (err, data) => {
           if (err) {
-            return res.status(400).json({
-              message: "Troubles when update some fields",
-              error: err.message,
-            });
+            return res.status(400).json(err.message);
           }
-          return res.status(201).json({
-            message: "Successfully update master data",
-            data,
-          });
+          return res.status(201).json(data);
         }
       ).clone();
     } catch (e) {

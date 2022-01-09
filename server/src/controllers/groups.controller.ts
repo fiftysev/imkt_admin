@@ -9,20 +9,14 @@ class GroupsController {
     if (req.query.format === "simple") {
       Group.find({}, { _id: 1, groupNumber: 1 }).exec((err, data) => {
         if (err) {
-          return res.status(500).json({
-            message: "Error when get all groups",
-            error: err,
-          });
+          return res.status(500).json(err.message);
         }
         return res.status(200).json(data);
       });
     } else {
       Group.find().exec((err, data) => {
         if (err) {
-          return res.status(500).json({
-            message: "Error when get all groups",
-            error: err,
-          });
+          return res.status(500).json(err.message);
         }
         return res.status(200).json(data);
       });
@@ -33,10 +27,7 @@ class GroupsController {
     if (req.params.id) {
       Group.findById(req.params.id as string).exec((err, data) => {
         if (err) {
-          return res.status(500).json({
-            message: "Error when get group by id",
-            error: err,
-          });
+          return res.status(500).json(err.message);
         }
         return res.status(200).json(data);
       });
@@ -50,10 +41,7 @@ class GroupsController {
       const id = req.params.id as string;
       Group.deleteOne({ _id: id }).exec((err, data) => {
         if (err) {
-          return res.status(500).json({
-            message: "Error when delete group by id",
-            error: err,
-          });
+          return res.status(500).json(err.message);
         }
         return res.status(200).json({
           message: "Succesfully deleted",
@@ -70,10 +58,7 @@ class GroupsController {
 
     group.save((err, data) => {
       if (err) {
-        return res.status(400).json({
-          message: "Troubles with data was sent",
-          err: err.message,
-        });
+        return res.status(400).json(err.message);
       }
       return res.status(201).json({
         message: "Group added successfull",
@@ -103,10 +88,7 @@ class GroupsController {
         { new: true },
         (err, data) => {
           if (err) {
-            return res.status(400).json({
-              message: "Troubles when update some fields",
-              error: err,
-            });
+            return res.status(400).json(err.message);
           }
           return res.status(201).json({
             message: "Successfully update group data",

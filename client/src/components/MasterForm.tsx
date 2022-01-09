@@ -4,8 +4,10 @@ import {
   FormControl,
   FormLabel,
   Input,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
+import { AxiosError } from "axios";
 import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "..";
@@ -22,6 +24,7 @@ const MasterForm = ({ master }: MasterFormProps) => {
   const { dataStore } = useContext(Context);
   const params = useParams();
   const navigate = useNavigate();
+  const toast = useToast();
 
   const masterData = params.id
     ? dataStore.masters.find((it) => it._id === params.id)
@@ -90,21 +93,54 @@ const MasterForm = ({ master }: MasterFormProps) => {
                   email,
                   another_contact: contact,
                   _id: masterData._id,
-                }).then((res) => {
-                  console.log(res.data);
-                  dataStore.updateMastersList();
-                  navigate("/masterslist");
-                });
+                })
+                  .then((res) => {
+                    toast({
+                      title: "Успешно",
+                      description: `Данные успешно обновлены`,
+                      status: "success",
+                      duration: 5000,
+                      isClosable: true,
+                    });
+                    dataStore.updateMastersList();
+                    navigate("/masterslist");
+                  })
+                  .catch((e: AxiosError) =>
+                    toast({
+                      title: "Ошибка",
+                      description: e.response.data,
+                      status: "error",
+                      duration: 5000,
+                      isClosable: true,
+                    })
+                  );
               } else {
                 await MastersService.createMaster({
                   name,
                   classroom,
                   email,
                   another_contact: contact,
-                }).then((res) => {
-                  dataStore.updateMastersList();
-                  navigate("/masterslist");
-                });
+                })
+                  .then((res) => {
+                    toast({
+                      title: "Успешно",
+                      description: `Данные успешно обновлены`,
+                      status: "success",
+                      duration: 5000,
+                      isClosable: true,
+                    });
+                    dataStore.updateMastersList();
+                    navigate("/masterslist");
+                  })
+                  .catch((e: AxiosError) => {
+                    toast({
+                      title: "Ошибка",
+                      description: e.response.data,
+                      status: "error",
+                      duration: 5000,
+                      isClosable: true,
+                    });
+                  });
               }
             }}
           >

@@ -1,4 +1,13 @@
-import { Box, Icon, IconButton, Table, Tbody, Td, Tr } from "@chakra-ui/react";
+import {
+  Box,
+  Icon,
+  IconButton,
+  Table,
+  Tbody,
+  Td,
+  Tr,
+  useToast,
+} from "@chakra-ui/react";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -7,10 +16,14 @@ import GroupForm from "./GroupForm/GroupForm";
 
 import { FiEdit2 } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
+import GroupsService from "../utils/groups.service";
+import { AxiosError } from "axios";
 
 const GroupsList = observer(() => {
   const { dataStore } = useContext(Context);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const toast = useToast();
+
   let groups = dataStore.groups;
   return (
     <Box flex="1">
@@ -34,10 +47,27 @@ const GroupsList = observer(() => {
                   <IconButton
                     aria-label="Удалить"
                     colorScheme="red"
-                    onClick={() => {
-                      dataStore
-                        .deleteGroup(v._id)
-                        .then((res) => dataStore.updateGroupsList());
+                    onClick={async () => {
+                      await GroupsService.deleteGroupById(v._id)
+                        .then((res) => {
+                          toast({
+                            title: "Успешно",
+                            description: `Данные о группе ${v.groupNumber} удалены`,
+                            status: "info",
+                            duration: 5000,
+                            isClosable: true,
+                          });
+                          dataStore.updateGroupsList();
+                        })
+                        .catch((e: AxiosError) => {
+                          toast({
+                            title: "Ошибка",
+                            description: e.response.data,
+                            status: "error",
+                            duration: 5000,
+                            isClosable: true,
+                          });
+                        });
                     }}
                     icon={
                       <Icon as={AiOutlineDelete} color="white" w={5} h={5} />

@@ -1,15 +1,28 @@
-import { Table, Tbody, Tr, Td, Box, Icon, IconButton } from "@chakra-ui/react";
+import {
+  Table,
+  Tbody,
+  Tr,
+  Td,
+  Box,
+  Icon,
+  IconButton,
+  useToast,
+} from "@chakra-ui/react";
+import { AxiosError } from "axios";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit2 } from "react-icons/fi";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Context } from "..";
+import MastersService from "../utils/masters.service";
 import MasterForm from "./MasterForm";
 
 const MastersList = observer(() => {
   const { dataStore } = useContext(Context);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const toast = useToast();
+
   let masters = dataStore.masters;
   return (
     <Box flex="1">
@@ -34,10 +47,27 @@ const MastersList = observer(() => {
                   <IconButton
                     aria-label="Удалить"
                     colorScheme="red"
-                    onClick={() => {
-                      dataStore
-                        .deleteGroup(v._id)
-                        .then((res) => dataStore.updateMastersList());
+                    onClick={async () => {
+                      await MastersService.deleteMasterById(v._id)
+                        .then((res) => {
+                          toast({
+                            title: "Успешно",
+                            description: `РОП ${v.name} удален`,
+                            status: "info",
+                            duration: 5000,
+                            isClosable: true,
+                          });
+                          dataStore.updateMastersList();
+                        })
+                        .catch((e: AxiosError) => {
+                          toast({
+                            title: "Ошибка",
+                            description: e.response.data,
+                            status: "error",
+                            duration: 5000,
+                            isClosable: true,
+                          });
+                        });
                     }}
                     icon={
                       <Icon as={AiOutlineDelete} color="white" w={5} h={5} />
