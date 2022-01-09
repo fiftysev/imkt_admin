@@ -14,10 +14,10 @@ type DTabPanelProps = {
 
 const DisciplinesTabPanel = ({ semesterNum }: DTabPanelProps) => {
   const { dataStore } = useContext(Context);
-  const [disciplines, setDisciplines] = useState<IDiscipline[]>(
-    dataStore.groupToUpdate.semesters.find((v) => v.semester === semesterNum)
-      .disciplines
-  );
+  const initialState = dataStore.groupToUpdate.semesters.find(
+    (v) => v.semester === semesterNum
+  ).disciplines;
+  const [disciplines, setDisciplines] = useState<IDiscipline[]>(initialState);
   return (
     <VStack spacing={4}>
       {disciplines?.map((v, i) => {
@@ -48,8 +48,12 @@ const DisciplinesTabPanel = ({ semesterNum }: DTabPanelProps) => {
             teacher: "",
             attestation_form: "",
           } as IDiscipline;
-          setDisciplines(disciplines.concat(newDiscipline));
           dataStore.addNewDiscipline(semesterNum, newDiscipline);
+          setDisciplines(
+            dataStore.groupToUpdate.semesters.find(
+              (v) => v.semester === semesterNum
+            ).disciplines
+          );
         }}
       />
     </VStack>

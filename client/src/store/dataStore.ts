@@ -47,6 +47,10 @@ export default class DataStore {
     this.newGroup.master = v;
   }
 
+  changeGroupName(v: string) {
+    this.newGroup.groupName = v;
+  }
+
   updatePracticesOrCourseworks(
     type: string,
     id: string,

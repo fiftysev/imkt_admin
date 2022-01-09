@@ -11,10 +11,11 @@ import { Context } from "../..";
 
 type IBlockProps = {
   groupNumber?: string;
+  groupName?: string;
   master?: string;
 };
 
-const InfoBlock = ({ groupNumber, master }: IBlockProps) => {
+const InfoBlock = ({ groupNumber, master, groupName }: IBlockProps) => {
   const { dataStore } = useContext(Context);
   return (
     <Box padding="4">
@@ -28,6 +29,17 @@ const InfoBlock = ({ groupNumber, master }: IBlockProps) => {
               dataStore.changeGroupNumber(e.target.value);
             }}
             defaultValue={groupNumber}
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Имя группы (для бота)</FormLabel>
+          <Input
+            type="text"
+            placeholder="Б9120-02.03.01sct"
+            onChange={(e) => {
+              dataStore.changeGroupName(e.target.value);
+            }}
+            defaultValue={groupName}
           />
         </FormControl>
         <FormControl>

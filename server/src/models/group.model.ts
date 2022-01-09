@@ -28,7 +28,7 @@ const courseWorkSchema = new Schema({
 const groupSchema = new Schema({
   groupName: { type: String, required: true },
   groupNumber: { type: String, required: true },
-  master: { type: Schema.Types.ObjectId, required: true, ref: "master" },
+  master: { type: String, required: true, ref: "master" },
   practices: { type: [practiceSchema], default: [], minlength: 6 },
   semesters: { type: [semesterSchema], default: [], maxlength: 8 },
   courseWorks: { type: [courseWorkSchema], default: [] },

@@ -16,7 +16,9 @@ import PracticesBlock from "./Practices/PracticesBlock";
 
 import { useContext } from "react";
 import { Context } from "../..";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import GroupsService from "../../utils/groups.service";
+import { observer } from "mobx-react-lite";
 
 type GroupFormProps = {
   isNew?: boolean;
@@ -25,6 +27,7 @@ type GroupFormProps = {
 const GroupForm = ({ isNew }: GroupFormProps) => {
   const { dataStore } = useContext(Context);
   const params = useParams();
+  const navigate = useNavigate();
 
   const groupData = isNew
     ? dataStore.setGroupToUpdate(emptyGroup)
@@ -51,6 +54,7 @@ const GroupForm = ({ isNew }: GroupFormProps) => {
             <InfoBlock
               groupNumber={groupData.groupNumber}
               master={groupData.master}
+              groupName={groupData.groupName}
             />
           </TabPanel>
           <TabPanel>
@@ -67,8 +71,20 @@ const GroupForm = ({ isNew }: GroupFormProps) => {
       <Box p={8} alignSelf="flex-end">
         <Button
           colorScheme="blue"
-          onClick={(e) => {
-            console.log(dataStore.groupToUpdate.semesters);
+          onClick={async (e) => {
+            isNew
+              ? await GroupsService.createGroup(dataStore.groupToUpdate).then(
+                  (res) => {
+                    dataStore.updateGroupsList();
+                    navigate("/groupslist");
+                  }
+                )
+              : await GroupsService.updateGroup(dataStore.groupToUpdate).then(
+                  (res) => {
+                    dataStore.updateGroupsList();
+                    navigate("/groupslist");
+                  }
+                );
           }}
         >
           Сохранить
@@ -78,4 +94,4 @@ const GroupForm = ({ isNew }: GroupFormProps) => {
   );
 };
 
-export default GroupForm;
+export default observer(GroupForm);
