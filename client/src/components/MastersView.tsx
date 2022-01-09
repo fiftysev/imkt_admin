@@ -1,6 +1,8 @@
-import { Table, Tbody, Tr, Td, Button, Box } from "@chakra-ui/react";
+import { Table, Tbody, Tr, Td, Box, Icon, IconButton } from "@chakra-ui/react";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
+import { AiOutlineDelete } from "react-icons/ai";
+import { FiEdit2 } from "react-icons/fi";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Context } from "..";
 import MasterForm from "./MasterForm";
@@ -19,21 +21,28 @@ const MastersList = observer(() => {
                 <Td w="full">{v.name}</Td>
                 <Td>{v.classroom}</Td>
                 <Td>
-                  <Button colorScheme="blue" onClick={() => navigate(v._id)}>
-                    Редактировать
-                  </Button>
+                  <IconButton
+                    aria-label="Редактировать"
+                    colorScheme="blue"
+                    onClick={() => {
+                      navigate(v._id);
+                    }}
+                    icon={<Icon as={FiEdit2} color="white" w={5} h={5} />}
+                  />
                 </Td>
                 <Td>
-                  <Button
+                  <IconButton
+                    aria-label="Удалить"
                     colorScheme="red"
                     onClick={() => {
                       dataStore
-                        .deleteMaster(v._id)
+                        .deleteGroup(v._id)
                         .then((res) => dataStore.updateMastersList());
                     }}
-                  >
-                    Удалить
-                  </Button>
+                    icon={
+                      <Icon as={AiOutlineDelete} color="white" w={5} h={5} />
+                    }
+                  />
                 </Td>
               </Tr>
             );

@@ -5,7 +5,7 @@ const tabs = ["1", "2", "3", "4", "5", "6", "7", "8"];
 
 const DisciplinesBlock = () => {
   return (
-    <Box padding={4} borderWidth={1} borderRadius={8} boxShadow={"lg"}>
+    <Box>
       <Tabs>
         <TabList>
           {tabs.map((v, i) => {
