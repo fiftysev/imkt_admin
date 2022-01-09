@@ -1,5 +1,4 @@
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
-import { observer } from "mobx-react-lite";
 import DisciplinesTabPanel from "./DisciplinesTabPanel";
 
 const tabs = ["1", "2", "3", "4", "5", "6", "7", "8"];
@@ -27,4 +26,4 @@ const DisciplinesBlock = () => {
   );
 };
 
-export default observer(DisciplinesBlock);
+export default DisciplinesBlock;
