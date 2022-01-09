@@ -75,21 +75,12 @@ export default class DataStore {
     this.newGroup.semesters[semIdx].disciplines[disciplineIdx][field] = value;
   }
 
-  addNewPractice(id: string) {
-    this.newGroup.practices.push({
-      uid: id,
-      practice_form: "",
-      title: "",
-    } as IPractice);
+  addNewPractice(practice: IPractice) {
+    this.newGroup.practices.push(practice);
   }
 
-  addNewCoursework(id: string) {
-    this.newGroup.courseWorks.push({
-      uid: id,
-      title: "",
-      attestation_form: "",
-      semester: "",
-    });
+  addNewCoursework(courseWork: ICourseWork) {
+    this.newGroup.courseWorks.push(courseWork);
   }
 
   addNewDiscipline(semesterNum: number, discipline: IDiscipline) {

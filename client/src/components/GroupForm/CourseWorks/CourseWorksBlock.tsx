@@ -1,18 +1,21 @@
 import { Icon, IconButton, VStack } from "@chakra-ui/react";
-import { observer } from "mobx-react-lite";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { HiDocumentAdd } from "react-icons/hi";
 
 import { v4 as uuid } from "uuid";
 
 import { Context } from "../../..";
+import { ICourseWork } from "../../../models/IGroup";
 import CourseWorkField from "./CourseWorkField";
 
 const CourseWorksBlock = () => {
   const { dataStore } = useContext(Context);
+  const [courseWorks, setCourseWorks] = useState<ICourseWork[]>(
+    dataStore.groupToUpdate.courseWorks
+  );
   return (
     <VStack spacing={4}>
-      {dataStore.groupToUpdate.courseWorks.map((v, i) => {
+      {courseWorks.map((v, i) => {
         return (
           <CourseWorkField
             key={i}
@@ -34,11 +37,18 @@ const CourseWorksBlock = () => {
         icon={<Icon as={HiDocumentAdd} />}
         colorScheme="green"
         onClick={() => {
-          dataStore.addNewCoursework(uuid());
+          const newCoursework = {
+            uid: uuid(),
+            title: "",
+            attestation_form: "",
+            semester: "",
+          } as ICourseWork;
+          setCourseWorks(courseWorks.concat(newCoursework));
+          dataStore.addNewCoursework(newCoursework);
         }}
       />
     </VStack>
   );
 };
 
-export default observer(CourseWorksBlock);
+export default CourseWorksBlock;
