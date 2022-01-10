@@ -1,4 +1,12 @@
-import { HStack, FormControl, Input, Select, Button } from "@chakra-ui/react";
+import {
+  HStack,
+  FormControl,
+  Input,
+  Select,
+  IconButton,
+  Icon,
+} from "@chakra-ui/react";
+import { AiOutlineDelete } from "react-icons/ai";
 import { attestationFormsList } from "../../../data/constants";
 import { ICourseWork } from "../../../models/IGroup";
 
@@ -62,9 +70,12 @@ const CourseWorkField = ({
           })}
         </Select>
       </FormControl>
-      <Button onClick={() => deleteHandler(courseWork.uid ?? courseWork._id)}>
-        Удалить
-      </Button>
+      <IconButton
+        aria-label="Удалить"
+        icon={<Icon as={AiOutlineDelete} color="white" w={5} h={5} />}
+        onClick={() => deleteHandler(courseWork._id ?? courseWork.uid)}
+        colorScheme="red"
+      />
     </HStack>
   );
 };

@@ -1,12 +1,14 @@
 import {
-  Button,
   Checkbox,
   FormControl,
   HStack,
+  Icon,
+  IconButton,
   Input,
   Select,
   VStack,
 } from "@chakra-ui/react";
+import { AiOutlineDelete } from "react-icons/ai";
 import { attestationFormsList } from "../../../data/constants";
 import { IDiscipline } from "../../../models/IGroup";
 
@@ -64,9 +66,12 @@ const DisciplineField = ({
           Факультатив
         </Checkbox>
       </VStack>
-      <Button onClick={() => deleteHandler(discipline._id ?? discipline.uid)}>
-        Удалить
-      </Button>
+      <IconButton
+        aria-label="Удалить"
+        icon={<Icon as={AiOutlineDelete} color="white" w={5} h={5} />}
+        onClick={() => deleteHandler(discipline._id ?? discipline.uid)}
+        colorScheme="red"
+      />
     </HStack>
   );
 };

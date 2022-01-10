@@ -9,6 +9,7 @@ import {
 } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "..";
+import { ColorModeSwitcher } from "../ColorModeSwitcher";
 
 type SidebarItemProps = {
   title: string;
@@ -92,6 +93,7 @@ const Sidebar = observer(() => {
       >
         Выйти
       </Button>
+      <ColorModeSwitcher />
     </Flex>
   );
 });
