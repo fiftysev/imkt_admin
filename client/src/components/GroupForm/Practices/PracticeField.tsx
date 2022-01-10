@@ -1,14 +1,7 @@
-import {
-  HStack,
-  FormControl,
-  Input,
-  Select,
-  Icon,
-  IconButton,
-} from "@chakra-ui/react";
-import { AiOutlineDelete } from "react-icons/ai";
+import { HStack, FormControl, Input, Select } from "@chakra-ui/react";
 import { practiceForms } from "../../../data/constants";
 import { IPractice } from "../../../models/IGroup";
+import DeleteButton from "../../DeleteButton";
 
 type PFieldProps = {
   practice?: IPractice;
@@ -44,11 +37,8 @@ const PracticeField = ({ practice, handler, deleteHandler }: PFieldProps) => {
           })}
         </Select>
       </FormControl>
-      <IconButton
-        aria-label="Удалить"
-        icon={<Icon as={AiOutlineDelete} color="white" w={5} h={5} />}
+      <DeleteButton
         onClick={() => deleteHandler(practice._id ?? practice.uid)}
-        colorScheme="red"
       />
     </HStack>
   );

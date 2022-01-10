@@ -11,11 +11,11 @@ import {
 import { AxiosError } from "axios";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
-import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit2 } from "react-icons/fi";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Context } from "..";
 import MastersService from "../utils/masters.service";
+import DeleteButton from "./DeleteButton";
 import MasterForm from "./MasterForm";
 
 const MastersList = observer(() => {
@@ -44,9 +44,7 @@ const MastersList = observer(() => {
                   />
                 </Td>
                 <Td>
-                  <IconButton
-                    aria-label="Удалить"
-                    colorScheme="red"
+                  <DeleteButton
                     onClick={async () => {
                       await MastersService.deleteMasterById(v._id)
                         .then((res) => {
@@ -69,9 +67,6 @@ const MastersList = observer(() => {
                           });
                         });
                     }}
-                    icon={
-                      <Icon as={AiOutlineDelete} color="white" w={5} h={5} />
-                    }
                   />
                 </Td>
               </Tr>

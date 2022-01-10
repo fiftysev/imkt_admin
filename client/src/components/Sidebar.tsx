@@ -1,4 +1,12 @@
-import { Flex, VStack, Text, Icon, Spacer, Button } from "@chakra-ui/react";
+import {
+  Flex,
+  VStack,
+  Text,
+  Icon,
+  Spacer,
+  Button,
+  HStack,
+} from "@chakra-ui/react";
 import { observer } from "mobx-react-lite";
 import { ReactNode, useContext } from "react";
 import {
@@ -43,9 +51,9 @@ const navItems = [
 const SidebarItem = (props: SidebarItemProps) => {
   return (
     <Link to={props.path}>
-      <Flex alignItems="center" padding="0.75rem">
+      <Flex alignItems="center" padding="0.5rem">
         {props.icon}
-        <Text color="white" fontSize="1.3rem" ml="0.5rem">
+        <Text color="white" fontSize="1.2rem" ml="0.5rem">
           {props.title}
         </Text>
       </Flex>
@@ -73,27 +81,24 @@ const Sidebar = observer(() => {
     >
       <VStack alignItems="flex-start">{items}</VStack>
       <Spacer />
-      <Text
-        color="white"
-        fontSize="1.3rem"
-        ml="0.5rem"
-        textAlign="center"
-        mb="0.5rem"
-      >
+      <Text color="white" fontSize="1.3rem" textAlign="center" mb="0.5rem">
         {store.user.username}
       </Text>
-      <Button
-        bgColor="red.500"
-        color="white"
-        fontWeight="bold"
-        onClick={() => {
-          store.logout();
-          navigate("/login");
-        }}
-      >
-        Выйти
-      </Button>
-      <ColorModeSwitcher />
+      <HStack>
+        <Button
+          flex="1"
+          bgColor="red.500"
+          color="white"
+          fontWeight="bold"
+          onClick={() => {
+            store.logout();
+            navigate("/login");
+          }}
+        >
+          Выйти
+        </Button>
+        <ColorModeSwitcher w="25%" />
+      </HStack>
     </Flex>
   );
 });

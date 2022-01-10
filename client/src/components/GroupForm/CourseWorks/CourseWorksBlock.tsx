@@ -1,11 +1,11 @@
-import { Icon, IconButton, VStack } from "@chakra-ui/react";
+import { VStack } from "@chakra-ui/react";
 import { useContext, useState } from "react";
-import { HiDocumentAdd } from "react-icons/hi";
 
 import { v4 as uuid } from "uuid";
 
 import { Context } from "../../..";
 import { ICourseWork } from "../../../models/IGroup";
+import AddButton from "../../AddButton";
 import CourseWorkField from "./CourseWorkField";
 
 const CourseWorksBlock = () => {
@@ -38,11 +38,7 @@ const CourseWorksBlock = () => {
           />
         );
       })}
-      <IconButton
-        alignSelf="flex-end"
-        aria-label="Добавить курсовую работу"
-        icon={<Icon as={HiDocumentAdd} color="white" w={5} h={5} />}
-        colorScheme="green"
+      <AddButton
         onClick={() => {
           const newCoursework = {
             uid: uuid(),

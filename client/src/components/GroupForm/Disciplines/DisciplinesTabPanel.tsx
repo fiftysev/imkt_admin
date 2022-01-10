@@ -1,12 +1,12 @@
-import { Icon, IconButton, VStack } from "@chakra-ui/react";
+import { VStack } from "@chakra-ui/react";
 import { useContext, useState } from "react";
-import { HiDocumentAdd } from "react-icons/hi";
 import { Context } from "../../..";
 
 import { v4 as uuid } from "uuid";
 
 import DisciplineField from "./DisciplineField";
 import { IDiscipline } from "../../../models/IGroup";
+import AddButton from "../../AddButton";
 
 type DTabPanelProps = {
   semesterNum?: number;
@@ -43,11 +43,7 @@ const DisciplinesTabPanel = ({ semesterNum }: DTabPanelProps) => {
           />
         );
       })}
-      <IconButton
-        alignSelf="flex-end"
-        aria-label="Добавить дисциплину"
-        icon={<Icon as={HiDocumentAdd} color="white" w={5} h={5} />}
-        colorScheme="green"
+      <AddButton
         onClick={() => {
           const newDiscipline = {
             uid: uuid(),

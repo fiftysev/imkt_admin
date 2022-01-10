@@ -15,9 +15,9 @@ import { Context } from "..";
 import GroupForm from "./GroupForm/GroupForm";
 
 import { FiEdit2 } from "react-icons/fi";
-import { AiOutlineDelete } from "react-icons/ai";
 import GroupsService from "../utils/groups.service";
 import { AxiosError } from "axios";
+import DeleteButton from "./DeleteButton";
 
 const GroupsList = observer(() => {
   const { dataStore } = useContext(Context);
@@ -44,9 +44,7 @@ const GroupsList = observer(() => {
                   />
                 </Td>
                 <Td>
-                  <IconButton
-                    aria-label="Удалить"
-                    colorScheme="red"
+                  <DeleteButton
                     onClick={async () => {
                       await GroupsService.deleteGroupById(v._id)
                         .then((res) => {
@@ -69,9 +67,6 @@ const GroupsList = observer(() => {
                           });
                         });
                     }}
-                    icon={
-                      <Icon as={AiOutlineDelete} color="white" w={5} h={5} />
-                    }
                   />
                 </Td>
               </Tr>

@@ -2,15 +2,13 @@ import {
   Checkbox,
   FormControl,
   HStack,
-  Icon,
-  IconButton,
   Input,
   Select,
   VStack,
 } from "@chakra-ui/react";
-import { AiOutlineDelete } from "react-icons/ai";
 import { attestationFormsList } from "../../../data/constants";
 import { IDiscipline } from "../../../models/IGroup";
+import DeleteButton from "../../DeleteButton";
 
 type FieldProps = {
   discipline?: IDiscipline;
@@ -66,11 +64,8 @@ const DisciplineField = ({
           Факультатив
         </Checkbox>
       </VStack>
-      <IconButton
-        aria-label="Удалить"
-        icon={<Icon as={AiOutlineDelete} color="white" w={5} h={5} />}
+      <DeleteButton
         onClick={() => deleteHandler(discipline._id ?? discipline.uid)}
-        colorScheme="red"
       />
     </HStack>
   );
