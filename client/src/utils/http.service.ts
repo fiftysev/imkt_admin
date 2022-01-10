@@ -2,7 +2,7 @@ import axios from "axios";
 import { IAuthResponse } from "../models/IAuthResponse";
 //store!
 
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = "/";
 
 const $api = axios.create({
   withCredentials: true,
