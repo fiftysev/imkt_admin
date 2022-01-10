@@ -11,7 +11,7 @@ const DeleteButton = ({ onClick }: Props) => {
       aria-label="Удалить"
       icon={<Icon as={AiOutlineDelete} color="white" w={5} h={5} />}
       onClick={() => onClick()}
-      colorScheme="red"
+      bgColor="#e63946"
     />
   );
 };

@@ -13,6 +13,9 @@ import { Input } from "@chakra-ui/input";
 import { Box, Heading, VStack, Text, Link } from "@chakra-ui/layout";
 
 import { Context } from "..";
+import AuthService from "../utils/auth.service";
+import { AxiosError } from "axios";
+import { useToast } from "@chakra-ui/react";
 
 const validationSchema = yup.object().shape({
   username: yup
@@ -35,14 +38,38 @@ type SignInFormInputs = {
 
 const SignInForm: FC = () => {
   const { store } = useContext(Context);
+  const toast = useToast();
 
   const { register, handleSubmit, errors } = useForm<SignInFormInputs>({
     mode: "onBlur",
     resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit = (data: SignInFormInputs) => {
-    store.login(data.username, data.password);
+  const onSubmit = async (data: SignInFormInputs) => {
+    store.setLoading(true);
+    await AuthService.login(data.username, data.password)
+      .then((res) => {
+        toast({
+          title: "Успешно",
+          description: `Пользователь ${data.username} авторизован`,
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+        localStorage.setItem("token", res.data.accessToken);
+        store.setAuth(true);
+        store.setUser(res.data.user);
+      })
+      .catch((err: AxiosError) =>
+        toast({
+          title: "Ошибка",
+          description: err.response.data.message,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        })
+      );
+    store.setLoading(false);
   };
 
   return (
@@ -73,10 +100,11 @@ const SignInForm: FC = () => {
             <FormErrorMessage>{errors?.password?.message}</FormErrorMessage>
           </FormControl>
           <Button
-            colorScheme={"green"}
+            colorScheme="blue"
             w={"full"}
             disabled={!!errors.username || !!errors.password}
             onClick={handleSubmit(onSubmit)}
+            bgColor="#457b9d"
           >
             Войти
           </Button>

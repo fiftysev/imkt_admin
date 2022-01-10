@@ -13,9 +13,12 @@ import {
   Input,
   Text,
   Link,
+  useToast,
 } from "@chakra-ui/react";
 
 import { Context } from "..";
+import AuthService from "../utils/auth.service";
+import { AxiosError } from "axios";
 
 const validationSchema = yup.object().shape({
   username: yup
@@ -45,14 +48,36 @@ type SignUpFormInputs = {
 
 export const SignUpForm: FC = () => {
   const { store } = useContext(Context);
+  const toast = useToast();
 
   const { register, handleSubmit, errors } = useForm<SignUpFormInputs>({
     mode: "onBlur",
     resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit = (data: SignUpFormInputs) => {
-    store.register(data.username, data.password);
+  const onSubmit = async (data: SignUpFormInputs) => {
+    await AuthService.register(data.username, data.password)
+      .then((response) => {
+        toast({
+          title: "Успешно",
+          description: `Пользователь ${data.username} зарегистрирован`,
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+        localStorage.setItem("token", response.data.accessToken);
+        store.setAuth(true);
+        store.setUser(response.data.user);
+      })
+      .catch((err: AxiosError) => {
+        toast({
+          title: "Ошибка",
+          description: err.response.data.message,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      });
   };
 
   return (
@@ -98,7 +123,7 @@ export const SignUpForm: FC = () => {
             </FormErrorMessage>
           </FormControl>
           <Button
-            colorScheme={"green"}
+            bgColor="457b9d"
             w={"full"}
             disabled={
               !!errors.username ||

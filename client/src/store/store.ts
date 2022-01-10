@@ -24,20 +24,6 @@ export default class Store {
     this.isLoading = flag;
   }
 
-  async login(email: string, password: string) {
-    this.setLoading(true);
-    await AuthService.login(email, password)
-      .then((response) => {
-        localStorage.setItem("token", response.data.accessToken);
-        this.setAuth(true);
-        this.setUser(response.data.user);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-      });
-    this.setLoading(false);
-  }
-
   async register(username: string, password: string) {
     await AuthService.register(username, password)
       .then((response) => {

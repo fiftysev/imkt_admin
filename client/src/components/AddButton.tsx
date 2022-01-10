@@ -11,7 +11,7 @@ const AddButton = ({ onClick }: Props) => {
       alignSelf="flex-end"
       aria-label="Add new"
       icon={<Icon as={HiDocumentAdd} color="white" w={5} h={5} />}
-      colorScheme="green"
+      bgColor="#2a9d8f"
       onClick={() => onClick()}
     />
   );

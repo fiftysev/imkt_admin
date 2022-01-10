@@ -71,9 +71,10 @@ const GroupForm = ({ isNew }: GroupFormProps) => {
           </TabPanel>
         </TabPanels>
       </Tabs>
-      <Box p={8} alignSelf="flex-end">
+      <Box p={4} alignSelf="flex-end">
         <Button
-          colorScheme="blue"
+          bgColor="#457b9d"
+          color="white"
           onClick={async (e) => {
             isNew
               ? await GroupsService.createGroup(dataStore.groupToUpdate)

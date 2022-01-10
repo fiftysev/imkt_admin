@@ -82,7 +82,8 @@ const MasterForm = ({ master }: MasterFormProps) => {
           </FormControl>
           <Button
             alignSelf="flex-end"
-            colorScheme="blue"
+            bgColor="#457b9d"
+            color="white"
             type="submit"
             onClick={async (e) => {
               e.preventDefault();

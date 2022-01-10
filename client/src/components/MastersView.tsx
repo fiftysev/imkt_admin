@@ -36,7 +36,7 @@ const MastersList = observer(() => {
                 <Td>
                   <IconButton
                     aria-label="Редактировать"
-                    colorScheme="blue"
+                    bgColor="#457b9d"
                     onClick={() => {
                       navigate(v._id);
                     }}

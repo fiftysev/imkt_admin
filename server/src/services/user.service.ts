@@ -10,7 +10,9 @@ class UserService {
   async registration(username: string, password: string) {
     const candidate = await AuthUser.findOne({ username });
     if (candidate) {
-      throw ApiError.BadRequest(`User ${username} is already exist`);
+      throw ApiError.BadRequest(
+        `Пользователь с логином ${username} уже существует`
+      );
     }
 
     const saltRounds = process.env.saltRounds || 5;
@@ -30,12 +32,15 @@ class UserService {
     const user = await AuthUser.findOne({ username });
 
     if (!user) {
-      throw ApiError.BadRequest(`User ${username} is not found`, "username");
+      throw ApiError.BadRequest(
+        `Пользователь ${username} не найден`,
+        "username"
+      );
     }
 
     const isPasswordMatching = await bcrypt.compare(password, user.password);
     if (!isPasswordMatching) {
-      throw ApiError.BadRequest("Incorrect Password!", "password");
+      throw ApiError.BadRequest("Неверный пароль!", "password");
     }
     const userDto = new UserDTO(user);
     const tokens = tokenService.generateTokens({ ...userDto });
