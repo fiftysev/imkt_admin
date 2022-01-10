@@ -1,8 +1,8 @@
 .DS_store
 .idea
 
-/server/.env
-/server/node_modules
+.env
+node_modules
 
 /client/node_modules
 /client/.pnp
