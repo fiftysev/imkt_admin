@@ -41,7 +41,7 @@ const CourseWorksBlock = () => {
       <IconButton
         alignSelf="flex-end"
         aria-label="Добавить курсовую работу"
-        icon={<Icon as={HiDocumentAdd} />}
+        icon={<Icon as={HiDocumentAdd} color="white" w={5} h={5} />}
         colorScheme="green"
         onClick={() => {
           const newCoursework = {

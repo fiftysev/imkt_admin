@@ -46,7 +46,7 @@ const DisciplinesTabPanel = ({ semesterNum }: DTabPanelProps) => {
       <IconButton
         alignSelf="flex-end"
         aria-label="Добавить дисциплину"
-        icon={<Icon as={HiDocumentAdd} />}
+        icon={<Icon as={HiDocumentAdd} color="white" w={5} h={5} />}
         colorScheme="green"
         onClick={() => {
           const newDiscipline = {

@@ -25,6 +25,7 @@ export default class Store {
   }
 
   async login(email: string, password: string) {
+    this.setLoading(true);
     await AuthService.login(email, password)
       .then((response) => {
         localStorage.setItem("token", response.data.accessToken);
@@ -34,6 +35,7 @@ export default class Store {
       .catch((err) => {
         console.log(err.response.data);
       });
+    this.setLoading(false);
   }
 
   async register(username: string, password: string) {
