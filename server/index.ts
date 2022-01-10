@@ -1,4 +1,5 @@
 require("dotenv").config();
+import * as os from "os";
 import express from "express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
@@ -11,30 +12,27 @@ import { mastersRouter } from "./src/routers/masters.router";
 import errorMiddleware from "./src/middlewares/error.middleware";
 
 const app = express();
+import * as path from "path";
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(
-  cors({
-    credentials: true,
-    origin: process.env.CLIENT_URL,
-  })
-);
+app.use(cors());
 app.use("/auth", userRouter);
 app.use("/groups", groupsRouter);
 app.use("/masters", mastersRouter);
 app.use(errorMiddleware);
 
-app.get("/", (req: express.Request, res: express.Response) => {
-  res.send("Main route");
+app.use(express.static(path.resolve(__dirname, "../client/build")));
+app.get("*", function (req, res) {
+  res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
 });
 
 const startServe = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_WRITE_CONNECTION_STRING!);
     app.listen(process.env.PORT, () => {
-      console.log(`App started at http://localhost:${process.env.PORT}`);
+      console.log(`App started at ${process.env.PORT}`);
     });
   } catch (e) {
     console.log(e);

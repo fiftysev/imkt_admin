@@ -1,13 +1,14 @@
 import { Router } from "express";
 import mastersController from "../controllers/masters.controller";
+import authMiddleware from "../middlewares/auth.middleware";
 
 export const mastersRouter = Router();
 
-mastersRouter.get("/", mastersController.getAll);
-mastersRouter.get("/:id", mastersController.getById);
+mastersRouter.get("/", authMiddleware, mastersController.getAll);
+mastersRouter.get("/:id", authMiddleware, mastersController.getById);
 
-mastersRouter.post("/create", mastersController.addOne);
+mastersRouter.post("/create", authMiddleware, mastersController.addOne);
 
-mastersRouter.delete("/:id", mastersController.deleteOne);
+mastersRouter.delete("/:id", authMiddleware, mastersController.deleteOne);
 
-mastersRouter.patch("/update", mastersController.updateMaster);
+mastersRouter.patch("/update", authMiddleware, mastersController.updateMaster);
