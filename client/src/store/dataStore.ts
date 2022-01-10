@@ -39,16 +39,31 @@ export default class DataStore {
     return toJS(this.mastersList);
   }
 
-  changeGroupNumber(v: string) {
+  setGroupNumber(v: string) {
     this.newGroup.groupNumber = v;
   }
 
-  changeMaster(v: string) {
+  setMaster(v: string) {
     this.newGroup.master = v;
   }
 
-  changeGroupName(v: string) {
+  setGroupName(v: string) {
     this.newGroup.groupName = v;
+  }
+
+  setPractices(practices: IPractice[]) {
+    this.newGroup.practices = practices;
+  }
+
+  setCourseWorks(courseWorks: ICourseWork[]) {
+    this.newGroup.courseWorks = courseWorks;
+  }
+
+  setDisciplines(semesterNum: number, disciplines: IDiscipline[]) {
+    const idx = this.newGroup.semesters.findIndex(
+      (v) => v.semester === semesterNum
+    );
+    this.newGroup.semesters[idx].disciplines = disciplines;
   }
 
   updatePracticesOrCourseworks(
@@ -91,9 +106,7 @@ export default class DataStore {
     const idx = this.newGroup.semesters.findIndex(
       (v) => v.semester === semesterNum
     );
-    this.newGroup.semesters[idx].disciplines.push({
-      discipline,
-    });
+    this.newGroup.semesters[idx].disciplines.push({ discipline });
   }
 
   async updateGroupsList() {

@@ -26,7 +26,7 @@ const InfoBlock = ({ groupNumber, master, groupName }: IBlockProps) => {
             type="text"
             placeholder="Б9120-02.03.01сцт"
             onChange={(e) => {
-              dataStore.changeGroupNumber(e.target.value);
+              dataStore.setGroupNumber(e.target.value);
             }}
             defaultValue={groupNumber}
           />
@@ -37,7 +37,7 @@ const InfoBlock = ({ groupNumber, master, groupName }: IBlockProps) => {
             type="text"
             placeholder="Б9120-02.03.01sct"
             onChange={(e) => {
-              dataStore.changeGroupName(e.target.value);
+              dataStore.setGroupName(e.target.value);
             }}
             defaultValue={groupName}
           />
@@ -48,7 +48,7 @@ const InfoBlock = ({ groupNumber, master, groupName }: IBlockProps) => {
             placeholder="Выбрать из списка"
             defaultValue={dataStore.masters.find((v) => v._id === master)?._id}
             onChange={(e) => {
-              dataStore.changeMaster(e.target.value);
+              dataStore.setMaster(e.target.value);
             }}
           >
             {dataStore.masters.map((v, i) => {

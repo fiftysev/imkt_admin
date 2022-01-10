@@ -1,4 +1,5 @@
 import {
+  Button,
   Checkbox,
   FormControl,
   HStack,
@@ -11,11 +12,15 @@ import { IDiscipline } from "../../../models/IGroup";
 
 type FieldProps = {
   discipline?: IDiscipline;
-  handler?: Function;
+  onChangeHandler?: Function;
+  deleteHandler?: Function;
 };
 
-const DisciplineField = ({ discipline, handler }: FieldProps) => {
-  console.log("rendered!");
+const DisciplineField = ({
+  discipline,
+  onChangeHandler,
+  deleteHandler,
+}: FieldProps) => {
   return (
     <HStack w="100%" alignItems="flex-start">
       <FormControl>
@@ -24,7 +29,7 @@ const DisciplineField = ({ discipline, handler }: FieldProps) => {
           placeholder="Web-программирование"
           name="title"
           defaultValue={discipline.title}
-          onChange={(e) => handler(e.target.name, e.target.value)}
+          onChange={(e) => onChangeHandler(e.target.name, e.target.value)}
         />
       </FormControl>
       <FormControl w="40%">
@@ -32,7 +37,7 @@ const DisciplineField = ({ discipline, handler }: FieldProps) => {
           placeholder="Выберите из списка"
           defaultValue={discipline.attestation_form}
           name="attestation_form"
-          onChange={(e) => handler(e.target.name, e.target.value)}
+          onChange={(e) => onChangeHandler(e.target.name, e.target.value)}
         >
           {attestationFormsList.map((v, i) => {
             return (
@@ -47,18 +52,21 @@ const DisciplineField = ({ discipline, handler }: FieldProps) => {
         <Checkbox
           isChecked={discipline.optional}
           name="optional"
-          onChange={(e) => handler(e.target.name, e.target.checked)}
+          onChange={(e) => onChangeHandler(e.target.name, e.target.checked)}
         >
           По выбору
         </Checkbox>
         <Checkbox
           isChecked={discipline.faculty}
           name="faculty"
-          onChange={(e) => handler(e.target.name, e.target.checked)}
+          onChange={(e) => onChangeHandler(e.target.name, e.target.checked)}
         >
           Факультатив
         </Checkbox>
       </VStack>
+      <Button onClick={() => deleteHandler(discipline._id ?? discipline.uid)}>
+        Удалить
+      </Button>
     </HStack>
   );
 };

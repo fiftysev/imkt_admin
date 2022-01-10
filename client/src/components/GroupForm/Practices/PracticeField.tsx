@@ -1,13 +1,14 @@
-import { HStack, FormControl, Input, Select } from "@chakra-ui/react";
+import { HStack, FormControl, Input, Select, Button } from "@chakra-ui/react";
 import { practiceForms } from "../../../data/constants";
 import { IPractice } from "../../../models/IGroup";
 
 type PFieldProps = {
   practice?: IPractice;
   handler?: Function;
+  deleteHandler?: Function;
 };
 
-const PracticeField = ({ practice, handler }: PFieldProps) => {
+const PracticeField = ({ practice, handler, deleteHandler }: PFieldProps) => {
   return (
     <HStack w="100%" alignItems="flex-start">
       <FormControl>
@@ -35,6 +36,9 @@ const PracticeField = ({ practice, handler }: PFieldProps) => {
           })}
         </Select>
       </FormControl>
+      <Button onClick={() => deleteHandler(practice.uid ?? practice._id)}>
+        Удалить
+      </Button>
     </HStack>
   );
 };

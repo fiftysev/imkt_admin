@@ -18,7 +18,7 @@ const CourseWorksBlock = () => {
       {courseWorks.map((v, i) => {
         return (
           <CourseWorkField
-            key={i}
+            key={v._id ?? v.uid}
             courseWork={v}
             handler={(field: string, value: string) =>
               dataStore.updatePracticesOrCourseworks(
@@ -28,6 +28,13 @@ const CourseWorksBlock = () => {
                 value
               )
             }
+            deleteHandler={(id: string) => {
+              const newData = courseWorks.filter(
+                (it) => it._id !== id && it.uid !== id
+              );
+              setCourseWorks(newData);
+              dataStore.setCourseWorks(newData);
+            }}
           />
         );
       })}

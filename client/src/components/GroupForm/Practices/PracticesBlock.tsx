@@ -19,7 +19,7 @@ const PracticesBlock = () => {
       {practices.map((v, i) => {
         return (
           <PracticeField
-            key={i}
+            key={v._id ?? v.uid}
             practice={v}
             handler={(field: string, value: string) =>
               dataStore.updatePracticesOrCourseworks(
@@ -29,6 +29,13 @@ const PracticesBlock = () => {
                 value
               )
             }
+            deleteHandler={(id: string) => {
+              const newData = practices.filter(
+                (it) => it._id !== id && it.uid !== id
+              );
+              setPractices(newData);
+              dataStore.setPractices(newData);
+            }}
           />
         );
       })}

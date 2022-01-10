@@ -1,13 +1,18 @@
-import { HStack, FormControl, Input, Select } from "@chakra-ui/react";
+import { HStack, FormControl, Input, Select, Button } from "@chakra-ui/react";
 import { attestationFormsList } from "../../../data/constants";
 import { ICourseWork } from "../../../models/IGroup";
 
 type CWFieldProps = {
   courseWork?: ICourseWork;
   handler?: Function;
+  deleteHandler?: Function;
 };
 
-const CourseWorkField = ({ courseWork, handler }: CWFieldProps) => {
+const CourseWorkField = ({
+  courseWork,
+  handler,
+  deleteHandler,
+}: CWFieldProps) => {
   return (
     <HStack w="100%" alignItems="flex-start">
       <FormControl>
@@ -57,6 +62,9 @@ const CourseWorkField = ({ courseWork, handler }: CWFieldProps) => {
           })}
         </Select>
       </FormControl>
+      <Button onClick={() => deleteHandler(courseWork.uid ?? courseWork._id)}>
+        Удалить
+      </Button>
     </HStack>
   );
 };

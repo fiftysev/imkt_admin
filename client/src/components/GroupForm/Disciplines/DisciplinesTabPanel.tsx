@@ -23,9 +23,9 @@ const DisciplinesTabPanel = ({ semesterNum }: DTabPanelProps) => {
       {disciplines?.map((v, i) => {
         return (
           <DisciplineField
+            key={v._id ?? v.uid}
             discipline={v}
-            key={i}
-            handler={(field: string, value: string | boolean) =>
+            onChangeHandler={(field: string, value: string | boolean) =>
               dataStore.updateSemestersData(
                 semesterNum,
                 v._id || v.uid,
@@ -33,6 +33,13 @@ const DisciplinesTabPanel = ({ semesterNum }: DTabPanelProps) => {
                 value
               )
             }
+            deleteHandler={(id: string) => {
+              const newData = disciplines.filter(
+                (it) => it._id !== id && it.uid !== id
+              );
+              setDisciplines(newData);
+              dataStore.setDisciplines(semesterNum, newData);
+            }}
           />
         );
       })}
@@ -48,12 +55,8 @@ const DisciplinesTabPanel = ({ semesterNum }: DTabPanelProps) => {
             teacher: "",
             attestation_form: "",
           } as IDiscipline;
+          setDisciplines(disciplines.concat(newDiscipline));
           dataStore.addNewDiscipline(semesterNum, newDiscipline);
-          setDisciplines(
-            dataStore.groupToUpdate.semesters.find(
-              (v) => v.semester === semesterNum
-            ).disciplines
-          );
         }}
       />
     </VStack>
