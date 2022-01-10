@@ -124,6 +124,7 @@ export const SignUpForm: FC = () => {
           </FormControl>
           <Button
             bgColor="457b9d"
+            color="white"
             w={"full"}
             disabled={
               !!errors.username ||

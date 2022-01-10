@@ -105,6 +105,7 @@ const SignInForm: FC = () => {
             disabled={!!errors.username || !!errors.password}
             onClick={handleSubmit(onSubmit)}
             bgColor="#457b9d"
+            color="white"
           >
             Войти
           </Button>

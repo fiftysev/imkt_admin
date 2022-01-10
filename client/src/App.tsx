@@ -1,4 +1,5 @@
-import { ChakraProvider, theme } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
+import theme from "./theme";
 import { observer } from "mobx-react-lite";
 import { FC, useContext, useEffect } from "react";
 import {
