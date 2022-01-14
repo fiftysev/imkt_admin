@@ -63,7 +63,7 @@ const SignInForm: FC = () => {
       .catch((err: AxiosError) =>
         toast({
           title: "Ошибка",
-          description: err.response.data.message,
+          description: err.response?.data.message,
           status: "error",
           duration: 5000,
           isClosable: true,
