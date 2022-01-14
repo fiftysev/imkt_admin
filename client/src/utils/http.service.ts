@@ -2,7 +2,7 @@ import axios from "axios";
 import { IAuthResponse } from "../models/IAuthResponse";
 //store!
 
-const apiUrl = "/";
+const apiUrl = "/api";
 
 const $api = axios.create({
   withCredentials: true,

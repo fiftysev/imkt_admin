@@ -18,9 +18,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
-app.use("/auth", userRouter);
-app.use("/groups", groupsRouter);
-app.use("/masters", mastersRouter);
+app.use("/api/auth", userRouter);
+app.use("/api/groups", groupsRouter);
+app.use("/api/masters", mastersRouter);
 app.use(errorMiddleware);
 
 app.use(express.static(path.resolve(__dirname, "./client/build")));
