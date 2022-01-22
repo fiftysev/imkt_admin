@@ -10,7 +10,7 @@ import {
   FormErrorMessage,
 } from "@chakra-ui/form-control";
 import { Input } from "@chakra-ui/input";
-import { Box, Heading, VStack, Text, Link } from "@chakra-ui/layout";
+import { Box, Heading, VStack, Text } from "@chakra-ui/layout";
 
 import { Context } from "..";
 import AuthService from "../utils/auth.service";
@@ -109,14 +109,6 @@ const SignInForm: FC = () => {
           >
             Войти
           </Button>
-          <Box>
-            <Text fontSize={"md"}>
-              Еще нет аккаунта?{" "}
-              <Link href="/signup" color={"cyan.600"}>
-                Зарегистрироваться
-              </Link>
-            </Text>
-          </Box>
         </VStack>
       </form>
     </Box>
