@@ -106,7 +106,7 @@ export default class DataStore {
     const idx = this.newGroup.semesters.findIndex(
       (v) => v.semester === semesterNum
     );
-    this.newGroup.semesters[idx].disciplines.push({ discipline });
+    this.newGroup.semesters[idx].disciplines.push(discipline);
   }
 
   async updateGroupsList() {
